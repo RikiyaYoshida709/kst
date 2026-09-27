@@ -481,6 +481,8 @@ const pic = (m, extra="") => `<div class="pic">${m.photo?`<img src="${m.photo}" 
 const isRelay = r => r[3] && r[3].length===4;
 const LEG_STROKE = {"メドレーリレー":["背泳ぎ","平泳ぎ","バタフライ","自由形"],"フリーリレー":["自由形","自由形","自由形","自由形"]};
 function legOf(r,id){ const i=r[3].indexOf(id); return {n:i+1, lap:(r[7]||[])[i]||"", stroke:(LEG_STROKE[r[0]]||[])[i]||""}; }
+// 同タイムで複数の記録保持者がいる場合、大会回は記録保持者の並び順に対応（例: "53･55" → 1人目=第53回, 2人目=第55回）
+function meetsFor(r,id){ const ms=String(r[5]).split('･'); return (r[6] && ms.length===r[3].length) ? [ms[r[3].indexOf(id)]] : ms; }
 function recsOf(id){
   const out=[];
   for(const g of ["M","W"]) for(const r of RECORDS[g]) if(r[2] && r[3].includes(id)) out.push({g,r});
@@ -513,7 +515,7 @@ function renderPlayer(id){
   const indiv = recs.filter(x=>!isRelay(x.r)), relays = recs.filter(x=>isRelay(x.r)), held = [...indiv, ...relays];
   const byYear = {};
   recs.forEach(({g,r})=>{
-    String(r[5]).split('･').forEach(k=>{
+    meetsFor(r,id).forEach(k=>{
       const M=MEETS[k]; (byYear[M.year]=byYear[M.year]||{meet:M.name,items:[]}).items.push(r);
     });
   });
@@ -603,12 +605,12 @@ document.getElementById('rec-tabs').addEventListener('click',e=>{
 function renderHistory(){
   const byMeet={};
   for(const g of ["M","W"]) for(const r of RECORDS[g]) if(r[2])
-    String(r[5]).split('･').forEach(k=>(byMeet[k]=byMeet[k]||[]).push({g,r}));
+    String(r[5]).split('･').forEach((k,i,ms)=>(byMeet[k]=byMeet[k]||[]).push({g,r,holder:(r[6]&&ms.length===r[3].length)?r[3][i]:r[3][0]}));
   let html=`<div class="hi next"><div class="y">2027<small>NEXT</small></div><div><h3>第56回和歌山県短水路選手権水泳競技大会（予定）</h3><div class="cnt">フリーリレー・メドレーリレーの連覇なるか。</div></div></div>`;
   Object.keys(MEETS).sort((a,b)=>b-a).forEach(k=>{
     const M=MEETS[k], list=byMeet[k]||[], sw=new Set(); list.forEach(x=>x.r[3].forEach(id=>sw.add(id)));
     html+=`<div class="hi"><div class="y">${M.year}<small>${M.dates}</small></div><div><h3>${M.name}</h3>
-      <div class="chips">${list.map(({g,r})=>`<span class="chip">${g==='W'?'女子 ':''}${r[0]} ${r[1]}${r[3].length===4?'':'　'+byId[r[3][0]].name.split(' ')[0]}<b>${r[2]}</b></span>`).join('')}</div>
+      <div class="chips">${list.map(({g,r,holder})=>`<span class="chip">${g==='W'?'女子 ':''}${r[0]} ${r[1]}${r[3].length===4?'':'　'+byId[holder].name.split(' ')[0]}<b>${r[2]}</b></span>`).join('')}</div>
       <div class="cnt">この大会で樹立したKST記録：${list.length}種目</div></div></div>`;
   });
   document.getElementById('timeline').innerHTML=html;
