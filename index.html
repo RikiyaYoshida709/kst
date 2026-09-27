@@ -203,6 +203,19 @@ body.player #player-view{display:block}
 .g-best li strong{font-family:var(--num);font-size:26px;color:var(--navy);line-height:1.1}
 .g-best li em{grid-column:1/-1;font-style:normal;font-size:11px;color:var(--mute)}
 .g-res .results{border-top:0}
+.ctable{border-collapse:collapse;margin-top:6px;font-size:14px;width:100%;max-width:760px}
+.ctable td{padding:5px 12px 5px 0;border-bottom:1px dashed var(--line);vertical-align:baseline}
+.ctable tr:last-child td{border-bottom:0}
+.c-ev{font-weight:700;white-space:nowrap}
+.c-leg{font-size:11px;font-weight:700;color:var(--mute);margin-left:8px}
+.c-rd{font-size:12px;color:var(--mute);white-space:nowrap}
+.c-t{font-family:var(--num);font-size:17px;font-weight:700;color:var(--navy);white-space:nowrap}
+.c-t small{font-family:'Zen Kaku Gothic New',sans-serif;font-size:11px;color:var(--mute);font-weight:500;margin-left:8px}
+.rk{font-size:12px;font-weight:700;color:var(--mute)}
+.rk.medal{color:#fff;padding:1px 7px;border-radius:2px}
+.rk.m1{background:#c9a227}.rk.m2{background:#8f9aa6}.rk.m3{background:#a86a3d}
+.c-tag .kst{margin-left:0;margin-right:4px}
+@media (max-width:640px){.ctable,.ctable tbody,.ctable tr,.ctable td{display:block}.ctable tr{padding:6px 0;border-bottom:1px dashed var(--line)}.ctable td{border:0;padding:1px 0;display:inline-block;margin-right:8px}}
 @media (max-width:760px){.glory{grid-template-columns:1fr}}
 
 /* ===== records ===== */
@@ -310,7 +323,7 @@ footer b{font-family:var(--num);color:#fff;font-size:24px;letter-spacing:.08em;m
           <div class="facts">
             <div class="fact"><div class="l">登録選手</div><div class="n" id="f-mem">10<small>名</small></div></div>
             <div class="fact"><div class="l">チーム平均年齢</div><div class="n">30<small>歳</small></div></div>
-            <div class="fact"><div class="l">前年度 和歌山県短水路選手権<br>メダル獲得数</div><div class="n">●●<small>個</small></div></div>
+            <div class="fact"><div class="l">前年度 和歌山県短水路選手権<br>メダル獲得数</div><div class="n">5<small>個</small></div></div>
             <div class="fact"><div class="l">監督：小谷の体重</div><div class="n">113<small>kg</small></div></div>
           </div>
           <div class="mission">
@@ -441,9 +454,9 @@ const RECORDS = {
   M:[
     ["自由形","50m","23.79",["okamoto"],"2026/1/10",55],
     ["自由形","100m","53.03",["nishimoto","yamamoto"],"2024/1/14 ･ 2026/1/11","53･55",true],
-    ["自由形","200m","1:55.80",["yamamoto"],"2026/1/10",55],
+    ["自由形","200m","1:55.75",["yamamoto"],"2026/1/10",55],
     ["自由形","400m"],["自由形","800m"],["自由形","1500m"],
-    ["背泳ぎ","50m","26.45",["nakasuji"],"2026/1/11",55],
+    ["背泳ぎ","50m","26.45",["nakasuji"],"2026/1/11",55,false,null,"メドレーリレー決勝 第1泳"],
     ["背泳ぎ","100m","58.12",["nakasuji"],"2026/1/11",55],
     ["背泳ぎ","200m"],
     ["平泳ぎ","50m","29.89",["yoshida"],"2026/1/11",55],
@@ -469,6 +482,44 @@ const RECORDS = {
   ]
 };
 
+
+/* ---------------------------------------------------------
+   大会ごとの出場結果（個人プロフィールの「KST出場実績」に表示）
+   出典：KST公式YouTube 各動画の概要欄（第55回 / 2026）
+   個人: [種目, ラウンド, 選手id, タイム, 順位]
+   リレー: {ev, rd, team, total, rank, legs:[[選手id, ラップ], ×4]}
+   --------------------------------------------------------- */
+const RESULTS = {
+  55: {
+    indiv: [
+      ["50m自由形","予選","okamoto","23.79"],["50m自由形","決勝","okamoto","23.96",5],
+      ["100m自由形","予選","yamamoto","53.37"],["100m自由形","予選","okamoto","53.65"],
+      ["100m自由形","決勝","yamamoto","53.03",5],["100m自由形","決勝","okamoto","53.90",6],
+      ["200m自由形","予選","yamamoto","1:57.65"],["200m自由形","決勝","yamamoto","1:55.75",4],
+      ["100m背泳ぎ","予選","nakasuji","1:02.28"],["100m背泳ぎ","決勝","nakasuji","58.12",3],
+      ["50m平泳ぎ","予選","yoshida","29.89"],["50m平泳ぎ","予選","samoto","32.57"],["50m平泳ぎ","決勝","yoshida","31.77",8],
+      ["50mバタフライ","予選","doi","24.78"],["50mバタフライ","予選","okamoto","26.22"],["50mバタフライ","予選","kimura","27.46"],
+      ["50mバタフライ","決勝","doi","24.58",2],["50mバタフライ","決勝","okamoto","26.20",4],
+      ["100mバタフライ","予選","nishimoto","58.58"],["100mバタフライ","予選","nakaoka","59.32"],
+      ["100mバタフライ","決勝","nishimoto","57.37",4],["100mバタフライ","決勝","nakaoka","58.45",8],
+      ["100m個人メドレー","予選","yamamoto","1:00.54"],["100m個人メドレー","予選","nishimoto","1:00.90"],["100m個人メドレー","予選","yoshida","1:01.45"],
+      ["100m個人メドレー","予選","nakasuji","1:02.55"],["100m個人メドレー","予選","kimura","1:02.92"],["100m個人メドレー","予選","nakaoka","1:03.73"],
+      ["100m個人メドレー","決勝","yamamoto","58.93",2],["100m個人メドレー","決勝","nishimoto","1:00.46",5],["100m個人メドレー","決勝","yoshida","1:01.61",7],
+      ["200m個人メドレー","予選","doi","2:20.71"],
+    ],
+    relay: [
+      {ev:"4×50mフリーリレー", rd:"予選", team:"A", total:"1:37.93", legs:[["nishimoto","24.51"],["yoshida","24.51"],["nakaoka","25.08"],["okamoto","23.83"]]},
+      {ev:"4×50mフリーリレー", rd:"予選", team:"B", total:"1:37.12", legs:[["doi","24.11"],["kimura","25.37"],["yamamoto","23.95"],["nakasuji","23.69"]]},
+      {ev:"4×50mフリーリレー", rd:"決勝", team:"B", total:"1:34.43", rank:1, legs:[["doi","23.82"],["nakasuji","23.25"],["okamoto","23.48"],["yamamoto","23.88"]]},
+      {ev:"4×50mフリーリレー", rd:"決勝", team:"A", total:"1:38.42", rank:7, legs:[["nishimoto","24.24"],["yoshida","24.59"],["nakaoka","24.51"],["kimura","25.08"]]},
+      {ev:"4×50mメドレーリレー", rd:"予選", team:"A", total:"1:47.89", legs:[["nakasuji","28.15"],["yoshida","29.63"],["nakaoka","25.85"],["yamamoto","24.26"]]},
+      {ev:"4×50mメドレーリレー", rd:"予選", team:"B", total:"1:48.68", legs:[["doi","27.28"],["samoto","32.44"],["nishimoto","24.92"],["okamoto","24.04"]]},
+      {ev:"4×50mメドレーリレー", rd:"決勝", team:"A", total:"1:43.11", rank:1, legs:[["nakasuji","26.45"],["yoshida","29.15"],["doi","23.92"],["okamoto","23.59"]]},
+      {ev:"4×50mメドレーリレー", rd:"決勝", team:"B", total:"1:51.05", rank:8, legs:[["nishimoto","27.97"],["samoto","32.50"],["nakaoka","26.24"],["yamamoto","24.34"]]},
+    ]
+  }
+};
+
 /* ================= 以下は表示ロジック ================= */
 const byId = Object.fromEntries(MEMBERS.map(m=>[m.id,m]));
 const TBD = '<span class="ph">本人確認中</span>';
@@ -481,6 +532,8 @@ const pic = (m, extra="") => `<div class="pic">${m.photo?`<img src="${m.photo}" 
 const isRelay = r => r[3] && r[3].length===4;
 const LEG_STROKE = {"メドレーリレー":["背泳ぎ","平泳ぎ","バタフライ","自由形"],"フリーリレー":["自由形","自由形","自由形","自由形"]};
 function legOf(r,id){ const i=r[3].indexOf(id); return {n:i+1, lap:(r[7]||[])[i]||"", stroke:(LEG_STROKE[r[0]]||[])[i]||""}; }
+// 同タイムで複数の記録保持者がいる場合、大会回は記録保持者の並び順に対応（例: "53･55" → 1人目=第53回, 2人目=第55回）
+function meetsFor(r,id){ const ms=String(r[5]).split('･'); return (r[6] && ms.length===r[3].length) ? [ms[r[3].indexOf(id)]] : ms; }
 function recsOf(id){
   const out=[];
   for(const g of ["M","W"]) for(const r of RECORDS[g]) if(r[2] && r[3].includes(id)) out.push({g,r});
@@ -500,10 +553,49 @@ function renderGroups(){
           <div class="band"><span class="pos">${k}</span><span class="no">${pad(m.no)}</span><span>${m.name}</span></div>
           <div class="meta">
             <div class="job">${m.job ? 'Job：'+m.job : '<span class="ph">Job：本人確認中</span>'}</div>
-            <div class="sub">Favorite Alcoholic Drinks：${m.sake||'確認中'}${m.g==='W'&&!m.manager?'　／　女子':''}</div>
+            <div class="sub">Favorite Alcoholic Drinks：${m.sake||'確認中'}</div>
             <div class="emb">KST</div>
           </div></a>`;}).join('')}</div></div>`;
   }).join('');
+}
+
+/* --- KST出場実績の組み立て --- */
+const EV_ORDER=["50m自由形","100m自由形","200m自由形","400m自由形","50m背泳ぎ","100m背泳ぎ","200m背泳ぎ","50m平泳ぎ","100m平泳ぎ","200m平泳ぎ","50mバタフライ","100mバタフライ","200mバタフライ","100m個人メドレー","200m個人メドレー","400m個人メドレー","4×50mフリーリレー","4×50mメドレーリレー"];
+const evKey = r => isRelay(r) ? "4×50m"+r[0] : r[1]+r[0];
+function careerOf(id){
+  const years={};
+  const recs = recsOf(id);
+  const meets = new Set(); recs.forEach(({r})=>meetsFor(r,id).forEach(k=>meets.add(String(k)))); Object.keys(RESULTS).forEach(k=>meets.add(k));
+  meets.forEach(k=>{
+    const M=MEETS[k]; if(!M) return;
+    const rows=[], R=RESULTS[k], used=new Set();
+    const recAt = recs.filter(({r})=>meetsFor(r,id).map(String).includes(String(k)));
+    const findRec=(ev,t)=>recAt.find(({r})=>evKey(r)===ev && r[2]===t);
+    if(R){
+      R.indiv.filter(x=>x[2]===id).forEach(([ev,rd,,t,rk])=>{ const hit=findRec(ev,t); if(hit) used.add(hit.r); rows.push({ev,rd,t,rk,kst:!!hit}); });
+      R.relay.forEach(x=>{ const i=x.legs.findIndex(l=>l[0]===id); if(i<0) return;
+        const hit=findRec(x.ev,x.total); if(hit) used.add(hit.r);
+        const legRec=recAt.find(({r})=>r[8] && r[8].includes(x.rd) && r[8].includes(x.ev.replace('4×50m','')) && r[2]===x.legs[i][1]); if(legRec) used.add(legRec.r);
+        rows.push({ev:x.ev,rd:x.rd,t:x.legs[i][1],rk:x.rank,relay:{n:i+1,team:x.team,total:x.total},kst:!!hit,legKst:legRec?evKey(legRec.r):null}); });
+    }
+    recAt.filter(({r})=>!used.has(r)).forEach(({r})=>{ const L=isRelay(r)?legOf(r,id):null;
+      rows.push({ev:evKey(r),rd:r[8]||'記録表より',t:L?L.lap||r[2]:r[2],relay:L?{n:L.n,total:r[2]}:null,kst:true}); });
+    if(!rows.length) return;
+    rows.sort((a,b)=>(EV_ORDER.indexOf(a.ev)-EV_ORDER.indexOf(b.ev)) || ((a.rd==='決勝')-(b.rd==='決勝')));
+    years[M.year]={meet:M.name,rows};
+  });
+  return years;
+}
+function careerHTML(id){
+  const years=careerOf(id), ys=Object.keys(years).sort((a,b)=>b-a);
+  if(!ys.length) return '<p class="ph">これから刻みます。</p>';
+  return `<ul class="results career">${ys.map(y=>`<li><div class="y">${y}</div><div><div class="m">${years[y].meet}</div>
+    <table class="ctable">${years[y].rows.map(r=>`<tr>
+      <td class="c-ev">${r.ev}${r.relay?`<span class="c-leg">${r.relay.team?'Team '+r.relay.team+' ':''}${r.relay.n}泳</span>`:''}</td>
+      <td class="c-rd">${r.rd}</td>
+      <td class="c-t">${r.t}${r.relay&&r.relay.total?`<small>チーム ${r.relay.total}</small>`:''}</td>
+      <td class="c-rk">${r.rk?`<span class="rk${r.rk<=3?' medal m'+r.rk:''}">${r.rk}位</span>`:''}</td>
+      <td class="c-tag">${r.kst?'<span class="kst">KST記録</span>':''}${r.legKst?`<span class="kst">KST記録（${r.legKst}）</span>`:''}</td></tr>`).join('')}</table></div></li>`).join('')}</ul>`;
 }
 
 /* --- 個別プロフィールページ --- */
@@ -511,12 +603,6 @@ function renderPlayer(id){
   const m = byId[id]; if(!m) return false;
   const recs = recsOf(id);
   const indiv = recs.filter(x=>!isRelay(x.r)), relays = recs.filter(x=>isRelay(x.r)), held = [...indiv, ...relays];
-  const byYear = {};
-  recs.forEach(({g,r})=>{
-    String(r[5]).split('･').forEach(k=>{
-      const M=MEETS[k]; (byYear[M.year]=byYear[M.year]||{meet:M.name,items:[]}).items.push(r);
-    });
-  });
   const bests = m.bests||[], glory = m.glory||[];
   const idx = MEMBERS.indexOf(m), prev = MEMBERS[(idx-1+MEMBERS.length)%MEMBERS.length], next = MEMBERS[(idx+1)%MEMBERS.length];
   document.getElementById('player').innerHTML = `
@@ -536,8 +622,8 @@ function renderPlayer(id){
         </table>
         ${m.manager?'':`<div class="bestbox">
           <div class="badge"><b>KST</b><span>記録保持</span></div>
-          ${held.length? `<ul>${held.map(({g,r})=>{ if(!isRelay(r)) return `<li><small>${g==='W'?'女子 ':''}${r[1]}${r[0]}</small><strong>${swimTime(r[2])}</strong></li>`;
-              const L=legOf(r,id); return `<li><small>${g==='W'?'女子 ':''}${r[1]}${r[0]}<span class="legtag">${L.n}泳 ${L.stroke}</span></small><strong>${swimTime(r[2])}</strong>${L.lap?`<span class="laptxt">ラップ ${swimTime(L.lap)}</span>`:''}</li>`; }).join('')}</ul>`
+          ${held.length? `<ul>${held.map(({g,r})=>{ if(!isRelay(r)) return `<li><small>${r[1]}${r[0]}</small><strong>${swimTime(r[2])}</strong></li>`;
+              const L=legOf(r,id); return `<li><small>${r[1]}${r[0]}<span class="legtag">${L.n}泳 ${L.stroke}</span></small><strong>${swimTime(r[2])}</strong>${L.lap?`<span class="laptxt">ラップ ${swimTime(L.lap)}</span>`:''}</li>`; }).join('')}</ul>`
                         : `<ul><li class="none">個人種目のKST記録、虎視眈々と狙っています。</li></ul>`}
         </div>`}
       </div>
@@ -547,11 +633,8 @@ function renderPlayer(id){
     <div class="quote"><p>${m.motto || '<span style="opacity:.5">本人確認中</span>'}</p></div>
 
     ${m.manager?'':`<div class="pl-h">KST出場実績</div>
-    ${Object.keys(byYear).length? `<ul class="results">${Object.keys(byYear).sort((a,b)=>b-a).map(y=>`
-      <li><div class="y">${y}</div><div><div class="m">${byYear[y].meet}</div>
-      ${byYear[y].items.map(r=>{ const L=isRelay(r)?legOf(r,id):null; return `<div class="r">${r[1]}${r[0]}${L?`（${L.n}泳）`:''}<b>${r[2]}</b>${L&&L.lap?`<span style="font-size:12px;color:var(--mute);margin-left:8px">ラップ ${L.lap}</span>`:''}<span class="kst">KST記録</span></div>`; }).join('')}</div></li>`).join('')}</ul>`
-      : '<p class="ph">これから刻みます。</p>'}
-    <p style="font-size:12px;color:var(--mute);margin-top:10px">（2026年9月時点）</p>`}
+    ${careerHTML(id)}
+    <p style="font-size:12px;color:var(--mute);margin-top:10px">※ 2026年はKST公式YouTubeの概要欄より。2024・2025年はKST記録のみ掲載（2026年9月時点）</p>`}
 
     <div class="pl-h glory-h">過去の栄光<small>GLORY DAYS</small></div>
     <div class="glory">
@@ -603,12 +686,12 @@ document.getElementById('rec-tabs').addEventListener('click',e=>{
 function renderHistory(){
   const byMeet={};
   for(const g of ["M","W"]) for(const r of RECORDS[g]) if(r[2])
-    String(r[5]).split('･').forEach(k=>(byMeet[k]=byMeet[k]||[]).push({g,r}));
+    String(r[5]).split('･').forEach((k,i,ms)=>(byMeet[k]=byMeet[k]||[]).push({g,r,holder:(r[6]&&ms.length===r[3].length)?r[3][i]:r[3][0]}));
   let html=`<div class="hi next"><div class="y">2027<small>NEXT</small></div><div><h3>第56回和歌山県短水路選手権水泳競技大会（予定）</h3><div class="cnt">フリーリレー・メドレーリレーの連覇なるか。</div></div></div>`;
   Object.keys(MEETS).sort((a,b)=>b-a).forEach(k=>{
     const M=MEETS[k], list=byMeet[k]||[], sw=new Set(); list.forEach(x=>x.r[3].forEach(id=>sw.add(id)));
     html+=`<div class="hi"><div class="y">${M.year}<small>${M.dates}</small></div><div><h3>${M.name}</h3>
-      <div class="chips">${list.map(({g,r})=>`<span class="chip">${g==='W'?'女子 ':''}${r[0]} ${r[1]}${r[3].length===4?'':'　'+byId[r[3][0]].name.split(' ')[0]}<b>${r[2]}</b></span>`).join('')}</div>
+      <div class="chips">${list.map(({g,r,holder})=>`<span class="chip">${r[0]} ${r[1]}${r[3].length===4?'':'　'+byId[holder].name.split(' ')[0]}<b>${r[2]}</b></span>`).join('')}</div>
       <div class="cnt">この大会で樹立したKST記録：${list.length}種目</div></div></div>`;
   });
   document.getElementById('timeline').innerHTML=html;
