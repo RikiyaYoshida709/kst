@@ -404,6 +404,14 @@ footer b{font-family:var(--num);color:#fff;font-size:24px;letter-spacing:.08em;m
    ========================================================= */
 
 const MEMBERS = [
+  // ---- スタッフ（staff:true / pos=カードの帯に出る略称 / role=肩書き）
+  {id:"kotani",   name:"小谷 智也", roma:"", g:"M", group:"STAFF", staff:true, pos:"HC", role:"監督", roleEn:"HEAD COACH", photo:"",
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
+  {id:"hirono",   name:"廣野 由里", roma:"", g:"W", group:"STAFF", staff:true, pos:"MGR", role:"マネージャー", roleEn:"MANAGER", photo:"",
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
+  // ---- 選手
   {id:"okamoto",  no:1,  name:"岡本 匡史", roma:"", g:"M", group:"Fr", event:"自由形", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
@@ -434,15 +442,12 @@ const MEMBERS = [
   {id:"kimura",   no:10, name:"木村 匡克", roma:"", g:"M", group:"IM", event:"個人メドレー", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
-  {id:"hirono",   no:11, name:"廣野 由里", roma:"", g:"W", group:"MGR", event:"マネージャー", manager:true, photo:"",
-   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
-   bests:[], glory:[]},
 ];
 
 const GROUPS = [
+  ["STAFF","STAFF","スタッフ"],
   ["Fr","FREESTYLE","自由形"],["Ba","BACKSTROKE","背泳ぎ"],["Br","BREASTSTROKE","平泳ぎ"],
   ["Fly","BUTTERFLY","バタフライ"],["IM","INDIVIDUAL MEDLEY","個人メドレー"],
-  ["MGR","MANAGER","マネージャー"],
 ];
 
 const MEETS = {
@@ -552,7 +557,7 @@ function renderGroups(){
         const n = recsOf(m.id).length;
         return `<a class="card" href="#/player/${m.id}">
           ${pic(m, n?`<span class="recb">KST RECORD ×${n}</span>`:'')}
-          <div class="band"><span class="pos">${k}</span><span class="no">${pad(m.no)}</span><span>${m.name}</span></div>
+          <div class="band"><span class="pos">${m.staff?m.pos:k}</span>${m.staff?`<span class="no">${m.role}</span>`:`<span class="no">${pad(m.no)}</span>`}<span>${m.name}</span></div>
           <div class="meta">
             <div class="job">${m.job ? 'Job：'+m.job : '<span class="ph">Job：本人確認中</span>'}</div>
             <div class="sub">Favorite Alcoholic Drinks：${m.sake||'確認中'}</div>
@@ -614,7 +619,7 @@ function renderPlayer(id){
       <div>
         <div class="pl-name">${m.name}</div>
         <div class="pl-roma">${m.roma||'&nbsp;'}</div>
-        <span class="pl-tag">No.${pad(m.no)}　${m.manager?'MANAGER：マネージャー':'種目：'+m.event}</span>
+        <span class="pl-tag">${m.staff?`${m.roleEn}：${m.role}`:`No.${pad(m.no)}　種目：${m.event}`}</span>
         <div class="pl-h" style="margin-top:22px">プロフィール</div>
         <table class="ptable">
           <tr><th>出身地</th><td>${v(m.hometown)}</td></tr>
@@ -622,7 +627,7 @@ function renderPlayer(id){
           <tr><th>高校</th><td>${v(m.highschool)}</td></tr>
           <tr><th>引退年</th><td>${v(m.retired)}</td></tr>
         </table>
-        ${m.manager?'':`<div class="bestbox">
+        ${m.staff?'':`<div class="bestbox">
           <div class="badge"><b>KST</b><span>記録保持</span></div>
           ${held.length? `<ul>${held.map(({g,r})=>{ if(!isRelay(r)) return `<li><small>${r[1]}${r[0]}</small><strong>${swimTime(r[2])}</strong></li>`;
               const L=legOf(r,id); return `<li><small>${r[1]}${r[0]}<span class="legtag">${L.n}泳 ${L.stroke}</span></small><strong>${swimTime(r[2])}</strong>${L.lap?`<span class="laptxt">ラップ ${swimTime(L.lap)}</span>`:''}</li>`; }).join('')}</ul>`
@@ -634,7 +639,7 @@ function renderPlayer(id){
     <div class="pl-h">座右の銘</div>
     <div class="quote"><p>${m.motto || '<span style="opacity:.5">本人確認中</span>'}</p></div>
 
-    ${m.manager?'':`<div class="pl-h">KST出場実績</div>
+    ${m.staff?'':`<div class="pl-h">KST出場実績</div>
     ${careerHTML(id)}`}
 
     <div class="pl-h glory-h">過去の栄光<small>GLORY DAYS</small></div>
@@ -721,7 +726,7 @@ function route(){
 window.addEventListener('hashchange',route);
 
 /* init */
-document.getElementById('f-mem').innerHTML=MEMBERS.filter(m=>!m.manager).length+'<small>名</small>';
+document.getElementById('f-mem').innerHTML=MEMBERS.filter(m=>!m.staff).length+'<small>名</small>';
 renderGroups(); renderRecords('M'); renderHistory(); route();
 </script>
 </body>
