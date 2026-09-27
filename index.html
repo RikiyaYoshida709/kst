@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>小谷スイムチーム KST 公式サイト</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="和歌山の競泳を盛り上げたい。小谷監督率いるアラサースイマーたちの挑戦記録。小谷スイムチーム（KST）公式サイト。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小谷スイムチーム KST 公式サイト">
+<meta property="og:description" content="和歌山の競泳を盛り上げたい。小谷監督率いるアラサー達の挑戦記録。">
+<meta property="og:url" content="https://rikiyayoshida709.github.io/kst/">
+<meta property="og:image" content="https://rikiyayoshida709.github.io/kst/images/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1233; --navy2:#13205a; --cyan:#1f4fd6; --cyan-l:#e6ecfb; --gold:#f2c230; --red:#c8102e;
+  --bg:#ffffff; --bg2:#f3f5fa; --ink:#111a33; --mute:#66758a; --line:#dde4ed;
+  --num:'Oswald','Zen Kaku Gothic New',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:'Zen Kaku Gothic New','Hiragino Sans','Yu Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+
+/* ===== header (山梨学院型：白ロゴ枠＋ネイビーバー＋シアンMENU) ===== */
+header{position:sticky;top:0;z-index:50;display:flex;height:64px;background:var(--navy);color:#fff;box-shadow:0 2px 10px rgba(11,31,75,.25)}
+.logo{display:flex;align-items:center;gap:12px;background:#fff;color:var(--navy);padding:0 20px}
+.logo img{height:46px;width:auto}
+.logo b{font-family:var(--num);font-size:30px;letter-spacing:.06em;line-height:1}
+@media (max-width:480px){.logo span{display:none}}
+.logo span{font-size:10px;font-weight:700;line-height:1.35;border-left:2px solid var(--cyan);padding-left:10px}
+.gnav{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:2px;padding-right:12px}
+.gnav a{font-size:13px;font-weight:700;padding:8px 14px;opacity:.9;border-radius:3px}
+.gnav a:hover{background:rgba(255,255,255,.1)}
+.menu-btn{width:64px;background:var(--cyan);border:0;color:#fff;font-family:var(--num);font-size:11px;letter-spacing:.1em;cursor:pointer;display:none}
+.menu-btn i{display:block;font-style:normal;font-size:22px;line-height:1}
+@media (max-width:860px){
+  .gnav{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--navy);padding:8px 16px 16px}
+  .gnav.open{display:flex}
+  .menu-btn{display:block;margin-left:auto}
+  .logo{padding:0 16px}
+}
+
+/* ===== hero ===== */
+.hero{position:relative;background:#050a1f}
+.hero img{width:100%;height:auto;display:block;object-fit:contain}
+.hero .catch{background:var(--navy);color:#fff;text-align:center;padding:22px 20px;font-weight:900;font-size:clamp(16px,2.4vw,22px);letter-spacing:.05em}
+.hero .catch small{display:block;font-weight:500;font-size:clamp(13px,1.8vw,16px);letter-spacing:.08em;color:#c5d2f5;margin-top:6px}
+.hero .wave{height:10px;background:linear-gradient(90deg,var(--red) 0 33%,#fff 33% 34%,var(--cyan) 34%)}
+
+/* ===== section base ===== */
+section{padding:88px 0}
+.ttl{margin-bottom:40px}
+.ttl .en{font-family:var(--num);font-weight:700;font-size:clamp(40px,6.5vw,62px);line-height:1;color:var(--navy);letter-spacing:.02em}
+.ttl .ja{display:flex;align-items:center;gap:10px;font-weight:900;font-size:16px;margin-top:8px}
+.ttl .ja::before{content:"";width:28px;height:3px;background:linear-gradient(90deg,var(--red) 50%,var(--cyan) 50%)}
+.ttl .note{font-size:12px;color:var(--mute);margin-top:4px}
+.gray{background:var(--bg2)}
+
+/* ===== menu cards (山梨学院型) ===== */
+.menu-cards{position:relative;padding:70px 0 80px}
+.menu-cards::before{content:"";position:absolute;left:0;right:0;top:44%;bottom:0;background:linear-gradient(180deg,var(--red) 0 8px,var(--cyan) 8px)}
+.mc-grid{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.mc{background:#fff;box-shadow:0 10px 30px rgba(11,31,75,.12);transition:transform .2s}
+.mc:hover{transform:translateY(-4px)}
+.mc .img{aspect-ratio:16/8;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy) 0%,#1f3fa8 100%);display:flex;align-items:center;justify-content:center}
+.mc .img b{font-family:var(--num);font-size:clamp(46px,7vw,80px);color:rgba(255,255,255,.14);letter-spacing:.04em}
+.mc .img em{position:absolute;left:18px;bottom:14px;font-style:normal;font-family:var(--num);color:#fff;font-size:13px;letter-spacing:.2em}
+.mc .img .lanes{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 30px,rgba(255,255,255,.06) 30px 32px)}
+.mc .txt{padding:20px 24px 24px}
+.mc h3{font-size:19px;font-weight:900;display:flex;align-items:center;gap:10px}
+.mc h3::before{content:"";width:9px;height:9px;border-top:2px solid var(--red);border-right:2px solid var(--red);transform:rotate(45deg)}
+.mc p{font-size:13px;color:var(--mute);margin-top:6px}
+@media (max-width:700px){.mc-grid{grid-template-columns:1fr}}
+
+.mc .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.mc:hover .img img{transform:scale(1.04)}
+.mc .img.has-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,18,51,.75))}
+.mc .img.has-photo b{position:relative;z-index:1;color:rgba(255,255,255,.0)}
+.mc .img.has-photo em{z-index:2}
+.sec-hero{position:relative;aspect-ratio:2/1;min-height:260px;overflow:hidden;color:#fff;margin-bottom:56px}
+.sec-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sec-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,18,51,0) 55%,rgba(10,18,51,.8) 100%)}
+.sec-hero::before{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;z-index:2;background:linear-gradient(90deg,var(--red) 0 33%,var(--cyan) 33%)}
+.sec-hero .wrap{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:30px}
+.sec-hero .ttl{margin:0}
+.sec-hero .ttl .en{color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.35)}
+.sec-hero .ttl .note{color:rgba(255,255,255,.8)}
+section.has-hero{padding-top:0}
+@media (max-width:640px){
+  .sec-hero{aspect-ratio:auto;min-height:0;background:var(--navy);margin-bottom:40px}
+  .sec-hero img{position:static;height:auto;object-position:center!important}
+  .sec-hero::after{display:none}
+  .sec-hero .wrap{height:auto;padding:18px 20px 24px}
+}
+
+/* ===== about ===== */
+.about-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:52px;align-items:start}
+.about-grid h3{font-size:clamp(22px,3vw,30px);font-weight:900;line-height:1.45;margin-bottom:20px}
+.about-grid h3 mark{background:linear-gradient(transparent 64%,#ffc9d1 64%);color:inherit}
+.about-grid p{margin-bottom:14px;color:#33415a}
+.facts{display:grid;grid-template-columns:1fr 1fr;border-top:3px solid var(--navy)}
+.fact{padding:18px 16px;border-bottom:1px solid var(--line)}
+.fact:nth-child(odd){border-right:1px solid var(--line)}
+.fact .l{font-size:11px;font-weight:700;color:var(--mute)}
+.fact .n{font-family:var(--num);font-size:34px;font-weight:700;color:var(--navy);line-height:1.2}
+.fact .n small{font-family:'Zen Kaku Gothic New';font-size:14px;margin-left:3px}
+.mission{margin-top:22px;background:var(--navy);color:#fff;padding:22px 24px}
+.mission h4{font-family:var(--num);letter-spacing:.25em;color:#8fa8f0;font-size:12px;margin-bottom:8px}
+.mission li{list-style:none;padding:7px 0;border-top:1px solid rgba(255,255,255,.12);font-weight:700;font-size:14px}
+.mission li:first-of-type{border-top:0}
+.mission li span{color:#ff5a6e;font-family:var(--num);margin-right:10px}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr;gap:30px}}
+
+/* ===== members (Jリーグ代表型) ===== */
+.group{margin-bottom:46px}
+.group-h{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:20px}
+.group-h b{font-family:var(--num);font-size:26px;color:var(--navy);letter-spacing:.04em}
+.group-h span{font-weight:900}
+.group-h small{margin-left:auto;font-size:12px;color:var(--mute)}
+.roster{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:980px){.roster{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.roster{grid-template-columns:repeat(2,1fr);gap:12px}}
+.card{display:block;background:#fff;border:1px solid var(--line);transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:0 12px 26px rgba(11,31,75,.16);transform:translateY(-3px)}
+.pic{position:relative;aspect-ratio:1/1.05;background:linear-gradient(180deg,#f7f9fc 0%,#dfe8f2 100%);overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:cover}
+.pic svg.sil{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:74%}
+.pic .cr{position:absolute;top:6px;right:8px;font-size:9px;color:#9aa8b8}
+.pic .recb{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-family:var(--num);font-size:10px;font-weight:700;padding:1px 6px;letter-spacing:.05em}
+.band{background:var(--navy);color:#fff;padding:8px 12px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;line-height:1.3}
+.band .pos{font-family:var(--num);font-size:12px;color:#fff;background:var(--red);padding:0 6px;letter-spacing:.03em;white-space:nowrap}
+.band .no{font-family:var(--num);font-size:15px;white-space:nowrap}
+.card .meta{position:relative;padding:12px 12px 14px;min-height:92px;overflow:hidden}
+.card .meta .job{font-size:13px;font-weight:700;line-height:1.5;position:relative;z-index:1}
+.card .meta .sub{font-size:11px;color:var(--mute);margin-top:6px;position:relative;z-index:1}
+.card .meta .emb{position:absolute;right:-8px;bottom:-14px;font-family:var(--num);font-weight:700;font-size:54px;color:var(--cyan-l);line-height:1}
+.ph{color:#a4b1c0}
+
+/* ===== player page (ミズノ型) ===== */
+#player-view{display:none;padding-bottom:70px}
+body.player #home-view{display:none}
+body.player #player-view{display:block}
+.crumb{font-size:12px;color:var(--mute);padding:18px 0}
+.crumb a{text-decoration:underline}
+.pl-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start;padding-bottom:30px}
+.pl-top .pic{aspect-ratio:4/5}
+.pl-name{font-size:clamp(30px,4.2vw,44px);font-weight:900;line-height:1.2}
+.pl-roma{font-family:var(--num);letter-spacing:.14em;color:var(--mute);margin-top:4px}
+.pl-tag{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:3px 12px;margin-top:10px}
+.pl-h{font-size:24px;font-weight:900;border-left:6px solid var(--navy);padding:6px 0 6px 16px;margin:34px 0 14px;background:linear-gradient(90deg,var(--bg2),transparent)}
+.ptable{width:100%;border-collapse:collapse;font-size:14px}
+.ptable th{width:34%;background:var(--bg2);text-align:left;font-size:12px;font-weight:700;color:#4a5870;padding:12px 14px;border-bottom:1px solid #fff}
+.ptable td{padding:12px 14px;border-bottom:1px solid var(--line)}
+.bestbox{display:flex;margin-top:22px;border:2px solid var(--navy)}
+.bestbox .badge{flex:0 0 96px;background:linear-gradient(160deg,var(--red),#8e0b20);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 6px}
+.bestbox .badge b{font-family:var(--num);font-size:22px;color:#fff;letter-spacing:.06em;line-height:1}
+.bestbox .badge span{font-size:10px;margin-top:4px}
+.bestbox ul{list-style:none;padding:12px 20px;flex:1}
+.bestbox li{padding:4px 0}
+.bestbox li small{display:block;font-size:12px;color:var(--mute)}
+.bestbox li strong{font-family:var(--num);font-size:30px;color:var(--navy);line-height:1.1}
+.bestbox .none{color:var(--mute);font-size:13px;padding:14px 0}
+.quote{background:var(--navy);color:#fff;padding:26px 28px;position:relative;margin-top:8px}
+.quote::before{content:"“";position:absolute;left:14px;top:-18px;font-family:Georgia,serif;font-size:90px;color:var(--red);line-height:1}
+.quote p{font-size:clamp(18px,2.4vw,24px);font-weight:900;padding-left:18px}
+.fun{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fun > div{border:1px solid var(--line);padding:16px}
+.fun small{display:block;font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:.05em}
+.fun p{font-weight:700;margin-top:4px}
+.meter{display:flex;gap:4px;margin-top:8px}
+.meter i{flex:1;height:8px;background:var(--line)}
+.meter i.on{background:var(--cyan)}
+.meter.red i.on{background:var(--red)}
+.meter + span{font-size:12px;color:var(--mute)}
+@media (max-width:760px){.fun{grid-template-columns:1fr 1fr}.pl-top{grid-template-columns:1fr;gap:24px}}
+.results{list-style:none;border-top:1px solid var(--line)}
+.results li{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.results .y{font-family:var(--num);font-size:22px;color:var(--navy);font-weight:700}
+.results .m{font-weight:700}
+.results .r{font-size:14px;color:#33415a}
+.results .r b{font-family:var(--num);font-size:16px;margin-left:6px}
+.kst{display:inline-block;font-size:10px;background:var(--red);color:#fff;font-weight:700;padding:0 5px;margin-left:6px;vertical-align:2px}
+.pl-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-weight:700;font-size:14px}
+.pl-nav a{color:var(--navy)}
+.pl-nav .all{background:var(--navy);color:#fff;padding:10px 22px}
+
+/* ===== records ===== */
+.tabs{display:flex;margin-bottom:0}
+.tabs button{font:inherit;font-weight:900;font-size:15px;background:#e7edf4;border:0;padding:12px 30px;cursor:pointer;color:var(--mute)}
+.tabs button.on{background:var(--navy);color:#fff}
+.tbl-wrap{background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);overflow-x:auto}
+table.rec{width:100%;border-collapse:collapse;min-width:740px;font-size:14px}
+.rec th{background:var(--bg2);font-size:12px;font-weight:700;text-align:left;padding:10px 12px;color:#4a5870;border-bottom:1px solid var(--line)}
+.rec td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.rec td.stroke{font-weight:900;background:var(--cyan-l);color:var(--navy);white-space:nowrap;border-right:1px solid var(--line)}
+.rec td.dist{font-family:var(--num);font-size:15px;white-space:nowrap}
+.rec td.time{font-family:var(--num);font-size:21px;font-weight:700;color:var(--navy);white-space:nowrap}
+.rec td.mt{font-size:12px;color:var(--mute)}
+.rec td.date{font-family:var(--num);font-size:13px;white-space:nowrap;color:var(--mute)}
+.rec tr.empty td.time,.rec tr.empty td.who{color:#b4c0cd;font-family:inherit;font-size:12px;font-weight:700}
+.who a{font-weight:700;border-bottom:1px dotted var(--cyan)}
+.who a:hover{color:var(--cyan)}
+.tie{display:inline-block;font-size:10px;background:var(--red);color:#fff;padding:0 6px;margin-left:4px;vertical-align:2px}
+.rec-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-top:12px}
+
+/* ===== history ===== */
+.hist{border-top:3px solid var(--navy)}
+.hi{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line)}
+.hi .y{font-family:var(--num);font-size:40px;font-weight:700;color:var(--navy);line-height:1}
+.hi .y small{display:block;font-size:13px;color:var(--mute);letter-spacing:.04em;margin-top:6px}
+.hi h3{font-size:18px;font-weight:900;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:12px;border:1px solid var(--line);background:#fff;padding:4px 10px}
+.chip b{font-family:var(--num);font-size:14px;margin-left:6px;color:var(--navy)}
+.hi .cnt{font-size:12px;color:var(--mute);margin-top:10px}
+.hi.next .y{color:var(--cyan)}
+@media (max-width:640px){.hi{grid-template-columns:1fr;gap:10px}}
+
+/* ===== youtube ===== */
+.yt{background:var(--navy);color:#fff}
+.yt .ttl .en{color:#fff}
+.yt-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:center}
+.yt-frame{position:relative;aspect-ratio:16/9;background:#000;border:4px solid #fff}
+.yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-grid h3{font-size:24px;font-weight:900;line-height:1.45;margin-bottom:12px}
+.yt-grid p{opacity:.85}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-weight:700;padding:12px 26px;margin-top:18px}
+@media (max-width:820px){.yt-grid{grid-template-columns:1fr}}
+
+footer{background:#06122e;color:rgba(255,255,255,.7);padding:36px 0;font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer b{font-family:var(--num);color:#fff;font-size:24px;letter-spacing:.08em;margin-right:10px}
+.totop{position:fixed;right:16px;bottom:16px;z-index:40;width:52px;height:52px;background:var(--navy);color:#fff;font-family:var(--num);font-size:10px;letter-spacing:.1em;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2;border:2px solid #fff}
+.totop::before{content:"";width:10px;height:10px;border-top:2px solid #fff;border-left:2px solid #fff;transform:rotate(45deg);margin-bottom:2px}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#top"><img src="images/logo.png" alt="KST 小谷スイムチーム"><span>小谷スイムチーム<br>WAKAYAMA</span></a>
+  <nav class="gnav" id="gnav">
+    <a href="#about">チーム紹介</a>
+    <a href="#members">選手紹介</a>
+    <a href="#records">KST記録</a>
+    <a href="#history">大会出場履歴</a>
+    <a href="#movie">公式YouTube</a>
+  </nav>
+  <button class="menu-btn" onclick="document.getElementById('gnav').classList.toggle('open')"><i>≡</i>MENU</button>
+</header>
+
+<div id="home-view">
+  <!-- HERO -->
+  <div class="hero" id="top">
+    <img src="images/banner.jpg" alt="KST KOTANI SWIM TEAM 限界突破">
+    <div class="catch">『和歌山の競泳を盛り上げたい。』<small>小谷監督率いるアラサー達の挑戦記録。</small></div>
+    <div class="wave"></div>
+  </div>
+
+  <!-- MENU CARDS -->
+  <div class="menu-cards">
+    <div class="wrap">
+      <div class="mc-grid">
+        <a class="mc" href="#about"><div class="img has-photo"><img src="images/lounge.jpg" alt="" style="object-position:50% 20%"><b>ABOUT</b><em>TEAM</em></div><div class="txt"><h3>チーム紹介</h3><p>再結成の経緯、チームの目標、KSTが目指すものを紹介しています。</p></div></a>
+        <a class="mc" href="#members"><div class="img has-photo"><img src="images/party.jpg" alt="" style="object-position:50% 76%"><b>ATHLETES</b><em>MEMBERS</em></div><div class="txt"><h3>選手紹介</h3><p>専門種目、KST記録、Favorite Alcoholic Drinks、座右の銘まで。所属選手を紹介しています。</p></div></a>
+        <a class="mc" href="#records"><div class="img has-photo"><img src="images/podium.jpg" alt="" style="object-position:50% 45%"><b>RECORDS</b><em>KST RECORDS</em></div><div class="txt"><h3>KST記録</h3><p>チーム内の最速記録一覧（短水路）。男子・女子の全種目を掲載しています。</p></div></a>
+        <a class="mc" href="#history"><div class="img has-photo"><img src="images/history.jpg" alt="" style="object-position:50% 40%"><b>HISTORY</b><em>RESULTS</em></div><div class="txt"><h3>大会出場履歴</h3><p>これまでに出場した大会と、そこで生まれたKST記録を紹介しています。</p></div></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="has-hero">
+    <div class="sec-hero"><img src="images/lounge.jpg" alt="" style="object-position:50% 20%"><div class="wrap"><div class="ttl"><div class="en">ABOUT</div><div class="ja">チーム紹介</div></div></div></div>
+    <div class="wrap">
+      <div class="about-grid">
+        <div>
+          <h3>かつての<mark>和歌山トップスイマー</mark>たちが、<br>もう一度同じレーンに並ぶ。</h3>
+          <p>小谷スイムチーム（KST）は、和歌山県で幼少期から競泳に打ち込んできた同世代メンバーによるOB・OGチームです。高校・大学で競技を引退してから5〜10年。30歳という節目に再会し、チームを再結成しました。</p>
+          <p>現役時代はそれぞれの種目で県内トップレベルを争ったメンバーたち。今は仕事も体型もそれぞれ、練習もほぼしていません。それでもスタート台に立てば、あの頃の感覚が少しだけ戻ってきます。</p>
+          <p>私たちが泳ぎ続ける姿を通じて、和歌山県の水泳を少しでも盛り上げること。それがKSTの目標です。</p>
+        </div>
+        <div>
+          <div class="facts">
+            <div class="fact"><div class="l">登録選手</div><div class="n" id="f-mem">10<small>名</small></div></div>
+            <div class="fact"><div class="l">チーム平均年齢</div><div class="n">30<small>歳</small></div></div>
+            <div class="fact"><div class="l">前年度 和歌山県短水路選手権<br>メダル獲得数</div><div class="n">●●<small>個</small></div></div>
+            <div class="fact"><div class="l">監督：小谷の体重</div><div class="n">113<small>kg</small></div></div>
+          </div>
+          <div class="mission">
+            <h4>OUR MISSION</h4>
+            <ul>
+              <li><span>01</span>和歌山の水泳を盛り上げる</li>
+              <li><span>02</span>調整は肝臓から</li>
+              <li><span>03</span>忙しさ、睡眠不足を言い訳にしない</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERS -->
+  <section id="members" class="gray has-hero">
+    <div class="sec-hero"><img src="images/party.jpg" alt="" style="object-position:50% 76%"><div class="wrap"><div class="ttl"><div class="en">ATHLETES</div><div class="ja">選手紹介</div><div class="note">選手をクリックすると個別プロフィールページへ移動します</div></div></div></div>
+    <div class="wrap">
+      <div id="groups"></div>
+    </div>
+  </section>
+
+  <!-- RECORDS -->
+  <section id="records" class="has-hero">
+    <div class="sec-hero"><img src="images/podium.jpg" alt="" style="object-position:50% 45%"><div class="wrap"><div class="ttl"><div class="en">KST RECORDS</div><div class="ja">KST競泳記録（短水路）</div><div class="note">2026.9.20 現在</div></div></div></div>
+    <div class="wrap">
+      <div class="tabs" id="rec-tabs"><button class="on" data-g="M">男子</button><button data-g="W">女子</button></div>
+      <div class="tbl-wrap"><table class="rec"><thead><tr><th>種目</th><th>距離</th><th>記録</th><th>記録保持者／リレーメンバー</th><th>日付</th><th>大会名</th></tr></thead><tbody id="rec-body"></tbody></table></div>
+      <div class="rec-foot"><span>「-」の種目はKST記録なし。</span><span>同タイムの場合は両名を記録保持者とします。</span></div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="history" class="gray has-hero">
+    <div class="sec-hero"><img src="images/history.jpg" alt="" style="object-position:50% 40%"><div class="wrap"><div class="ttl"><div class="en">HISTORY</div><div class="ja">大会出場履歴</div></div></div></div>
+    <div class="wrap">
+      <div class="hist" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- YOUTUBE -->
+  <section id="movie" class="yt">
+    <div class="wrap">
+      <div class="ttl"><div class="en">MOVIE</div><div class="ja">KST公式YouTube</div></div>
+      <div class="yt-grid">
+        <div class="yt-frame"><iframe src="https://www.youtube.com/embed/1Kn-1pOyF-k" title="KST公式YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div>
+          <h3>脂の乗った選手の泳ぎを<br>公式YouTubeで配信中。</h3>
+          <p>社会に揉まれるアラサースイマーたちのリアルな奮闘ぶりを発信中。チャンネル登録で応援よろしくお願いします。</p>
+          <a class="btn" href="https://www.youtube.com/watch?v=1Kn-1pOyF-k" target="_blank" rel="noopener">▶ YouTubeで見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PLAYER PAGE -->
+<div id="player-view"><div class="wrap" id="player"></div></div>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:14px"><img src="images/logo.png" alt="KST" style="height:52px;background:#fff;padding:6px 10px;border-radius:4px">小谷スイムチーム / Kotani Swim Team — 和歌山県</div>
+    <div>© 2026 Kotani Swim Team</div>
+  </div>
+</footer>
+<a class="totop" href="#top">TOP</a>
+
+<script>
+/* =========================================================
+   ★ ここを書き換えればサイト全体に反映されます ★
+   photo : "photos/yoshida.jpg" のように写真パスを入れると顔写真に
+   ""    : 空欄の項目は「本人確認中」と表示
+   ========================================================= */
+
+const MEMBERS = [
+  {id:"okamoto",  no:1,  name:"岡本 匡史", roma:"", g:"M", group:"Fr", event:"自由形", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"yamamoto", no:2,  name:"山本 悠暉", roma:"", g:"M", group:"Fr", event:"自由形・個人メドレー", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"nishimoto",no:3,  name:"西本 憲伸", roma:"", g:"M", group:"Fr", event:"自由形", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"sakai",    no:4,  name:"酒井 文菜", roma:"", g:"W", group:"Fr", event:"自由形", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:0, comment:""},
+  {id:"nakasuji", no:5,  name:"中筋 勘太", roma:"", g:"M", group:"Ba", event:"背泳ぎ", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"yoshida",  no:6,  name:"吉田 力哉", roma:"RIKIYA YOSHIDA", g:"M", group:"Br", event:"平泳ぎ", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"samoto",   no:7,  name:"佐本 敦基", roma:"", g:"M", group:"Br", event:"平泳ぎ", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"doi",      no:8,  name:"土井 脩矢", roma:"", g:"M", group:"Fly", event:"バタフライ", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"nakaoka",  no:9,  name:"仲岡 唯斗", roma:"", g:"M", group:"Fly", event:"バタフライ", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"kimura",   no:10, name:"木村 匡克", roma:"", g:"M", group:"IM", event:"個人メドレー", photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+  {id:"hirono",   no:11, name:"廣野 由里", roma:"", g:"W", group:"MGR", event:"マネージャー", manager:true, photo:"",
+   career:"", job:"", sake:"", motto:"", item:"", weakness:"", oshi:"", role:"", comment:""},
+];
+
+const GROUPS = [
+  ["Fr","FREESTYLE","自由形"],["Ba","BACKSTROKE","背泳ぎ"],["Br","BREASTSTROKE","平泳ぎ"],
+  ["Fly","BUTTERFLY","バタフライ"],["IM","INDIVIDUAL MEDLEY","個人メドレー"],
+  ["MGR","MANAGER","マネージャー"],
+];
+
+const MEETS = {
+  53:{name:"第53回和歌山県短水路選手権水泳競技大会", year:2024, dates:"2024.1.13 – 1.14"},
+  54:{name:"第54回和歌山県短水路選手権水泳競技大会", year:2025, dates:"2025.1.11"},
+  55:{name:"第55回和歌山県短水路選手権水泳競技大会", year:2026, dates:"2026.1.10 – 1.11"},
+};
+
+// KST記録（短水路）2026.9.20現在  [種目, 距離, 記録, [記録保持者id], 日付, 大会回, 同タイム]
+const RECORDS = {
+  M:[
+    ["自由形","50m","23.79",["okamoto"],"2026/1/10",55],
+    ["自由形","100m","53.03",["nishimoto","yamamoto"],"2024/1/14 ･ 2026/1/11","53･55",true],
+    ["自由形","200m","1:55.80",["yamamoto"],"2026/1/10",55],
+    ["自由形","400m"],["自由形","800m"],["自由形","1500m"],
+    ["背泳ぎ","50m","26.45",["nakasuji"],"2026/1/11",55],
+    ["背泳ぎ","100m","58.12",["nakasuji"],"2026/1/11",55],
+    ["背泳ぎ","200m"],
+    ["平泳ぎ","50m","29.89",["yoshida"],"2026/1/11",55],
+    ["平泳ぎ","100m","1:11.14",["samoto"],"2024/1/13",53],
+    ["平泳ぎ","200m"],
+    ["バタフライ","50m","24.58",["doi"],"2026/1/10",55],
+    ["バタフライ","100m","57.06",["doi"],"2024/1/14",53],
+    ["バタフライ","200m","2:18.68",["nakaoka"],"2024/1/13",53],
+    ["個人メドレー","100m","58.93",["yamamoto"],"2026/1/10",55],
+    ["個人メドレー","200m","2:18.00",["kimura"],"2024/1/14",53],
+    ["個人メドレー","400m"],
+    ["フリーリレー","200m","1:34.43",["doi","nakasuji","okamoto","yamamoto"],"2026/1/10",55],
+    ["メドレーリレー","200m","1:43.11",["nakasuji","yoshida","doi","okamoto"],"2026/1/11",55],
+  ],
+  W:[
+    ["自由形","50m","28.11",["sakai"],"2025/1/11",54],
+    ["自由形","100m"],["自由形","200m"],["自由形","400m"],["自由形","800m"],["自由形","1500m"],
+    ["背泳ぎ","50m"],["背泳ぎ","100m"],["背泳ぎ","200m"],
+    ["平泳ぎ","50m"],["平泳ぎ","100m"],["平泳ぎ","200m"],
+    ["バタフライ","50m"],["バタフライ","100m"],["バタフライ","200m"],
+    ["個人メドレー","100m"],["個人メドレー","200m"],["個人メドレー","400m"],
+    ["フリーリレー","200m"],["メドレーリレー","200m"],
+  ]
+};
+
+/* ================= 以下は表示ロジック ================= */
+const byId = Object.fromEntries(MEMBERS.map(m=>[m.id,m]));
+const TBD = '<span class="ph">本人確認中</span>';
+const v = s => s || TBD;
+const pad = n => String(n).padStart(2,'0');
+const swimTime = t => { const [a,b] = t.includes(':')? t.split(':') : [null,t]; const [s,c]=b.split('.'); return (a?a+"'":"")+s+'"'+c; };
+const SIL = `<svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M8 210c4-56 42-86 92-86s88 30 92 86z" fill="#0b1f4b"/><path d="M86 118h28v18a14 14 0 01-28 0z" fill="#c9d6e3"/><circle cx="100" cy="72" r="44" fill="#c9d6e3"/><path d="M56 66c2-30 22-46 44-46s42 16 44 46c-12-8-26-12-44-12s-32 4-44 12z" fill="#1f4fd6"/><rect x="62" y="66" width="76" height="13" rx="6.5" fill="#14213d"/></svg>`;
+const pic = (m, extra="") => `<div class="pic">${m.photo?`<img src="${m.photo}" alt="${m.name}">`:SIL}<span class="cr">(c) KST</span>${extra}</div>`;
+
+function recsOf(id){
+  const out=[];
+  for(const g of ["M","W"]) for(const r of RECORDS[g]) if(r[2] && r[3].includes(id)) out.push({g,r});
+  return out;
+}
+
+/* --- 選手一覧（種目別グループ）--- */
+function renderGroups(){
+  document.getElementById('groups').innerHTML = GROUPS.map(([k,en,ja])=>{
+    const list = MEMBERS.filter(m=>m.group===k);
+    if(!list.length) return '';
+    return `<div class="group"><div class="group-h"><b>${en}</b><span>${ja}</span><small>${list.length}名</small></div>
+      <div class="roster">${list.map(m=>{
+        const n = recsOf(m.id).length;
+        return `<a class="card" href="#/player/${m.id}">
+          ${pic(m, n?`<span class="recb">KST RECORD ×${n}</span>`:'')}
+          <div class="band"><span class="pos">${k}</span><span class="no">${pad(m.no)}</span><span>${m.name}</span></div>
+          <div class="meta">
+            <div class="job">${m.job ? 'Job：'+m.job : '<span class="ph">Job：本人確認中</span>'}</div>
+            <div class="sub">Favorite Alcoholic Drinks：${m.sake||'確認中'}${m.g==='W'&&!m.manager?'　／　女子':''}</div>
+            <div class="emb">KST</div>
+          </div></a>`;}).join('')}</div></div>`;
+  }).join('');
+}
+
+/* --- 個別プロフィールページ --- */
+function meter(n, red, labels){
+  let s=`<div class="meter ${red?'red':''}">`; for(let i=1;i<=5;i++) s+=`<i class="${i<=n?'on':''}"></i>`;
+  return s+`</div><span>${labels[n]||''}</span>`;
+}
+function renderPlayer(id){
+  const m = byId[id]; if(!m) return false;
+  const recs = recsOf(id);
+  const indiv = recs.filter(x=>x.r[3].length<4);
+  const byYear = {};
+  recs.forEach(({g,r})=>{
+    String(r[5]).split('･').forEach(k=>{
+      const M=MEETS[k]; (byYear[M.year]=byYear[M.year]||{meet:M.name,items:[]}).items.push(r);
+    });
+  });
+  const idx = MEMBERS.indexOf(m), prev = MEMBERS[(idx-1+MEMBERS.length)%MEMBERS.length], next = MEMBERS[(idx+1)%MEMBERS.length];
+  document.getElementById('player').innerHTML = `
+    <div class="crumb"><a href="#top">TOP</a> ＞ <a href="#members">選手紹介</a> ＞ ${m.name}</div>
+    <div class="pl-top">
+      ${pic(m)}
+      <div>
+        <div class="pl-name">${m.name}</div>
+        <div class="pl-roma">${m.roma||'&nbsp;'}</div>
+        <span class="pl-tag">No.${pad(m.no)}　${m.manager?'MANAGER：マネージャー':'種目：'+m.event}</span>
+        <div class="pl-h" style="margin-top:22px">プロフィール</div>
+        <table class="ptable">
+          <tr><th>現役時代の経歴</th><td>${v(m.career)}</td></tr>
+          <tr><th>Job</th><td>${v(m.job)}</td></tr>
+          <tr><th>所属</th><td>小谷スイムチーム（KST）</td></tr>
+        </table>
+        ${m.manager?'':`<div class="bestbox">
+          <div class="badge"><b>KST</b><span>記録保持</span></div>
+          ${indiv.length? `<ul>${indiv.map(({g,r})=>`<li><small>${g==='W'?'女子 ':''}${r[1]}${r[0]}</small><strong>${swimTime(r[2])}</strong></li>`).join('')}</ul>`
+                        : `<ul><li class="none">個人種目のKST記録、虎視眈々と狙っています。</li></ul>`}
+        </div>`}
+      </div>
+    </div>
+
+    <div class="pl-h">座右の銘</div>
+    <div class="quote"><p>${m.motto || '<span style="opacity:.5">本人確認中</span>'}</p></div>
+
+    <div class="pl-h">オフ・ザ・プール</div>
+    <div class="fun">
+      <div><small>Favorite Alcoholic Drinks</small><p>${v(m.sake)}</p></div>
+      <div><small>愛用アイテム</small><p>${v(m.item)}</p></div>
+      <div><small>最近の弱点</small><p>${v(m.weakness)}</p></div>
+      ${m.manager? `<div><small>イチ推し選手</small><p>${v(m.oshi)}</p></div>
+      <div><small>チーム内の役割</small><p>${v(m.role)}</p></div>` :
+      `<div><small>練習頻度</small>${meter(m.practice,false,["皆無","ほぼゼロ","たまに","週1","週2〜3","ガチ勢"])}</div>
+      <div><small>現役比 体型</small>${meter(m.belly,true,["現役キープ","気持ち増","ほんのり増","しっかり増","貫禄","別人"])}</div>`}
+      <div><small>ひとこと</small><p>${v(m.comment)}</p></div>
+    </div>
+
+    ${m.manager?'':`<div class="pl-h">主な実績</div>
+    ${Object.keys(byYear).length? `<ul class="results">${Object.keys(byYear).sort((a,b)=>b-a).map(y=>`
+      <li><div class="y">${y}</div><div><div class="m">${byYear[y].meet}</div>
+      ${byYear[y].items.map(r=>`<div class="r">${r[1]}${r[0]}${r[3].length===4?'（リレー）':''}<b>${r[2]}</b><span class="kst">KST記録</span></div>`).join('')}</div></li>`).join('')}</ul>`
+      : '<p class="ph">これから刻みます。</p>'}
+    <p style="font-size:12px;color:var(--mute);margin-top:10px">（2026年9月時点）</p>`}
+
+    <div class="pl-nav">
+      <a href="#/player/${prev.id}">‹ ${prev.name}</a>
+      <a class="all" href="#members">選手一覧へ</a>
+      <a href="#/player/${next.id}">${next.name} ›</a>
+    </div>`;
+  return true;
+}
+
+/* --- 記録表 --- */
+function renderRecords(g){
+  const rows=RECORDS[g]; let html="", prev="";
+  const span={}; rows.forEach(r=>span[r[0]]=(span[r[0]]||0)+1);
+  rows.forEach(r=>{
+    const [st,d,t,who,date,meet,tie]=r;
+    const first=st!==prev; prev=st;
+    const names = who? who.map(id=>`<a href="#/player/${id}">${byId[id]?.name||id}</a>`).join(who.length===4?'・':'　/　') : '-';
+    html+=`<tr class="${t?'':'empty'}">${first?`<td class="stroke" rowspan="${span[st]}">${st}</td>`:''}
+      <td class="dist">${d}</td><td class="time">${t||'—'}</td>
+      <td class="who">${names}${tie?'<span class="tie">同タイム</span>':''}</td>
+      <td class="date">${date||''}</td><td class="mt">${meet?`第${meet}回和歌山県短水路選手権水泳競技大会`:''}</td></tr>`;
+  });
+  document.getElementById('rec-body').innerHTML=html;
+}
+document.getElementById('rec-tabs').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#rec-tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  renderRecords(b.dataset.g);
+});
+
+/* --- 大会出場履歴 --- */
+function renderHistory(){
+  const byMeet={};
+  for(const g of ["M","W"]) for(const r of RECORDS[g]) if(r[2])
+    String(r[5]).split('･').forEach(k=>(byMeet[k]=byMeet[k]||[]).push({g,r}));
+  let html=`<div class="hi next"><div class="y">2027<small>NEXT</small></div><div><h3>第56回和歌山県短水路選手権水泳競技大会（予定）</h3><div class="cnt">フリーリレー・メドレーリレーの連覇なるか。</div></div></div>`;
+  Object.keys(MEETS).sort((a,b)=>b-a).forEach(k=>{
+    const M=MEETS[k], list=byMeet[k]||[], sw=new Set(); list.forEach(x=>x.r[3].forEach(id=>sw.add(id)));
+    html+=`<div class="hi"><div class="y">${M.year}<small>${M.dates}</small></div><div><h3>${M.name}</h3>
+      <div class="chips">${list.map(({g,r})=>`<span class="chip">${g==='W'?'女子 ':''}${r[0]} ${r[1]}${r[3].length===4?'':'　'+byId[r[3][0]].name.split(' ')[0]}<b>${r[2]}</b></span>`).join('')}</div>
+      <div class="cnt">この大会で樹立したKST記録：${list.length}種目</div></div></div>`;
+  });
+  document.getElementById('timeline').innerHTML=html;
+}
+
+/* --- ルーティング（#/player/xxx で個別ページ） --- */
+function route(){
+  const h = location.hash;
+  document.getElementById('gnav').classList.remove('open');
+  if(h.startsWith('#/player/') && renderPlayer(h.split('/')[2])){
+    document.body.classList.add('player'); window.scrollTo(0,0); return;
+  }
+  document.body.classList.remove('player');
+  const t = h && document.getElementById(h.slice(1));
+  if(t) setTimeout(()=>t.scrollIntoView(),0);
+}
+window.addEventListener('hashchange',route);
+
+/* init */
+document.getElementById('f-mem').innerHTML=MEMBERS.filter(m=>!m.manager).length+'<small>名</small>';
+renderGroups(); renderRecords('M'); renderHistory(); route();
+</script>
+</body>
+</html>
