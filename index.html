@@ -148,7 +148,9 @@ section.has-hero{padding-top:0}
 #player-view{display:none;padding-bottom:70px}
 body.player #home-view{display:none}
 body.player #player-view{display:block}
-.crumb{font-size:12px;color:var(--mute);padding:18px 0}
+.crumb{font-size:12px;color:var(--mute);padding:18px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.back{font:inherit;font-size:13px;font-weight:700;background:var(--navy);color:#fff;border:0;padding:7px 16px;cursor:pointer}
+.back:hover{background:var(--cyan)}
 .crumb a{text-decoration:underline}
 .pl-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start;padding-bottom:30px}
 .pl-top .pic{aspect-ratio:4/5}
@@ -190,7 +192,18 @@ body.player #player-view{display:block}
 .kst{display:inline-block;font-size:10px;background:var(--red);color:#fff;font-weight:700;padding:0 5px;margin-left:6px;vertical-align:2px}
 .pl-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-weight:700;font-size:14px}
 .pl-nav a{color:var(--navy)}
-.pl-nav .all{background:var(--navy);color:#fff;padding:10px 22px}
+.pl-nav .all{font:inherit;font-weight:700;background:var(--navy);color:#fff;border:0;padding:10px 30px;cursor:pointer}
+.pl-nav .all:hover{background:var(--cyan)}
+.glory-h small{font-family:var(--num);font-size:12px;letter-spacing:.2em;color:var(--red);margin-left:12px;font-weight:600}
+.glory{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:28px}
+.g-lab{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.05em;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid var(--navy)}
+.g-best ul{list-style:none}
+.g-best li{display:grid;grid-template-columns:1fr auto;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}
+.g-best li small{font-size:13px;font-weight:700}
+.g-best li strong{font-family:var(--num);font-size:26px;color:var(--navy);line-height:1.1}
+.g-best li em{grid-column:1/-1;font-style:normal;font-size:11px;color:var(--mute)}
+.g-res .results{border-top:0}
+@media (max-width:760px){.glory{grid-template-columns:1fr}}
 
 /* ===== records ===== */
 .tabs{display:flex;margin-bottom:0}
@@ -365,31 +378,44 @@ footer b{font-family:var(--num);color:#fff;font-size:24px;letter-spacing:.08em;m
    ★ ここを書き換えればサイト全体に反映されます ★
    photo : "photos/yoshida.jpg" のように写真パスを入れると顔写真に
    ""    : 空欄の項目は「本人確認中」と表示
+   bests : 現役時代の自己ベスト  例 [["100m平泳ぎ","1:05.20","2012 全国JOC"], ...]
+   glory : 現役時代の主な戦績    例 [["2012","全国JOC夏季水泳競技大会","100m平泳ぎ 8位"], ...]
    ========================================================= */
 
 const MEMBERS = [
   {id:"okamoto",  no:1,  name:"岡本 匡史", roma:"", g:"M", group:"Fr", event:"自由形", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"yamamoto", no:2,  name:"山本 悠暉", roma:"", g:"M", group:"Fr", event:"自由形・個人メドレー", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"nishimoto",no:3,  name:"西本 憲伸", roma:"", g:"M", group:"Fr", event:"自由形", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"sakai",    no:4,  name:"酒井 文菜", roma:"", g:"W", group:"Fr", event:"自由形", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:0, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"nakasuji", no:5,  name:"中筋 勘太", roma:"", g:"M", group:"Ba", event:"背泳ぎ", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"yoshida",  no:6,  name:"吉田 力哉", roma:"RIKIYA YOSHIDA", g:"M", group:"Br", event:"平泳ぎ", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"samoto",   no:7,  name:"佐本 敦基", roma:"", g:"M", group:"Br", event:"平泳ぎ", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"doi",      no:8,  name:"土井 脩矢", roma:"", g:"M", group:"Fly", event:"バタフライ", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"nakaoka",  no:9,  name:"仲岡 唯斗", roma:"", g:"M", group:"Fly", event:"バタフライ", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"kimura",   no:10, name:"木村 匡克", roma:"", g:"M", group:"IM", event:"個人メドレー", photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", practice:1, belly:3, comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
   {id:"hirono",   no:11, name:"廣野 由里", roma:"", g:"W", group:"MGR", event:"マネージャー", manager:true, photo:"",
-   career:"", job:"", sake:"", motto:"", item:"", weakness:"", oshi:"", role:"", comment:""},
+   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
+   bests:[], glory:[]},
 ];
 
 const GROUPS = [
@@ -472,10 +498,6 @@ function renderGroups(){
 }
 
 /* --- 個別プロフィールページ --- */
-function meter(n, red, labels){
-  let s=`<div class="meter ${red?'red':''}">`; for(let i=1;i<=5;i++) s+=`<i class="${i<=n?'on':''}"></i>`;
-  return s+`</div><span>${labels[n]||''}</span>`;
-}
 function renderPlayer(id){
   const m = byId[id]; if(!m) return false;
   const recs = recsOf(id);
@@ -486,9 +508,10 @@ function renderPlayer(id){
       const M=MEETS[k]; (byYear[M.year]=byYear[M.year]||{meet:M.name,items:[]}).items.push(r);
     });
   });
+  const bests = m.bests||[], glory = m.glory||[];
   const idx = MEMBERS.indexOf(m), prev = MEMBERS[(idx-1+MEMBERS.length)%MEMBERS.length], next = MEMBERS[(idx+1)%MEMBERS.length];
   document.getElementById('player').innerHTML = `
-    <div class="crumb"><a href="#top">TOP</a> ＞ <a href="#members">選手紹介</a> ＞ ${m.name}</div>
+    <div class="crumb"><button class="back" onclick="goBack()">‹ 戻る</button><span><a href="#top">TOP</a> ＞ <a href="#members">選手紹介</a> ＞ ${m.name}</span></div>
     <div class="pl-top">
       ${pic(m)}
       <div>
@@ -497,9 +520,10 @@ function renderPlayer(id){
         <span class="pl-tag">No.${pad(m.no)}　${m.manager?'MANAGER：マネージャー':'種目：'+m.event}</span>
         <div class="pl-h" style="margin-top:22px">プロフィール</div>
         <table class="ptable">
-          <tr><th>現役時代の経歴</th><td>${v(m.career)}</td></tr>
-          <tr><th>Job</th><td>${v(m.job)}</td></tr>
-          <tr><th>所属</th><td>小谷スイムチーム（KST）</td></tr>
+          <tr><th>出身地</th><td>${v(m.hometown)}</td></tr>
+          <tr><th>現役時代所属<br>スイミングチーム</th><td>${v(m.club)}</td></tr>
+          <tr><th>高校</th><td>${v(m.highschool)}</td></tr>
+          <tr><th>引退年</th><td>${v(m.retired)}</td></tr>
         </table>
         ${m.manager?'':`<div class="bestbox">
           <div class="badge"><b>KST</b><span>記録保持</span></div>
@@ -512,28 +536,30 @@ function renderPlayer(id){
     <div class="pl-h">座右の銘</div>
     <div class="quote"><p>${m.motto || '<span style="opacity:.5">本人確認中</span>'}</p></div>
 
-    <div class="pl-h">オフ・ザ・プール</div>
-    <div class="fun">
-      <div><small>Favorite Alcoholic Drinks</small><p>${v(m.sake)}</p></div>
-      <div><small>愛用アイテム</small><p>${v(m.item)}</p></div>
-      <div><small>最近の弱点</small><p>${v(m.weakness)}</p></div>
-      ${m.manager? `<div><small>イチ推し選手</small><p>${v(m.oshi)}</p></div>
-      <div><small>チーム内の役割</small><p>${v(m.role)}</p></div>` :
-      `<div><small>練習頻度</small>${meter(m.practice,false,["皆無","ほぼゼロ","たまに","週1","週2〜3","ガチ勢"])}</div>
-      <div><small>現役比 体型</small>${meter(m.belly,true,["現役キープ","気持ち増","ほんのり増","しっかり増","貫禄","別人"])}</div>`}
-      <div><small>ひとこと</small><p>${v(m.comment)}</p></div>
-    </div>
-
-    ${m.manager?'':`<div class="pl-h">主な実績</div>
+    ${m.manager?'':`<div class="pl-h">KST出場実績</div>
     ${Object.keys(byYear).length? `<ul class="results">${Object.keys(byYear).sort((a,b)=>b-a).map(y=>`
       <li><div class="y">${y}</div><div><div class="m">${byYear[y].meet}</div>
       ${byYear[y].items.map(r=>`<div class="r">${r[1]}${r[0]}${r[3].length===4?'（リレー）':''}<b>${r[2]}</b><span class="kst">KST記録</span></div>`).join('')}</div></li>`).join('')}</ul>`
       : '<p class="ph">これから刻みます。</p>'}
     <p style="font-size:12px;color:var(--mute);margin-top:10px">（2026年9月時点）</p>`}
 
+    <div class="pl-h glory-h">過去の栄光<small>GLORY DAYS</small></div>
+    <div class="glory">
+      <div class="g-best">
+        <div class="g-lab">現役時代の自己ベスト</div>
+        ${bests.length? `<ul>${bests.map(b=>`<li><small>${b[0]}</small><strong>${b[1].includes('.')?swimTime(b[1]):b[1]}</strong>${b[2]?`<em>${b[2]}</em>`:''}</li>`).join('')}</ul>`
+                      : '<p class="ph">本人確認中</p>'}
+      </div>
+      <div class="g-res">
+        <div class="g-lab">主な戦績</div>
+        ${glory.length? `<ul class="results">${glory.map(g=>`<li><div class="y">${g[0]}</div><div><div class="m">${g[1]}</div><div class="r">${g[2]||''}</div></div></li>`).join('')}</ul>`
+                      : '<p class="ph">本人確認中</p>'}
+      </div>
+    </div>
+
     <div class="pl-nav">
       <a href="#/player/${prev.id}">‹ ${prev.name}</a>
-      <a class="all" href="#members">選手一覧へ</a>
+      <button class="all" onclick="goBack()">戻る</button>
       <a href="#/player/${next.id}">${next.name} ›</a>
     </div>`;
   return true;
@@ -575,16 +601,25 @@ function renderHistory(){
   document.getElementById('timeline').innerHTML=html;
 }
 
-/* --- ルーティング（#/player/xxx で個別ページ） --- */
+/* --- ルーティング（#/player/xxx で個別ページ）＆「戻る」で元の位置へ --- */
+if('scrollRestoration' in history) history.scrollRestoration='manual';
+let lastView='home', homeScroll=null, navByLink=false, enteredInApp=false;
+document.addEventListener('click',e=>{ if(e.target.closest('a[href^="#"]')) navByLink=true; },true);
+function jump(y){ window.scrollTo({top:y,left:0,behavior:'instant'}); }
+function goBack(){ if(enteredInApp) history.back(); else location.hash='#members'; }
 function route(){
   const h = location.hash;
   document.getElementById('gnav').classList.remove('open');
   if(h.startsWith('#/player/') && renderPlayer(h.split('/')[2])){
-    document.body.classList.add('player'); window.scrollTo(0,0); return;
+    if(lastView==='home'){ homeScroll = window.scrollY; if(navByLink) enteredInApp = true; }
+    document.body.classList.add('player'); jump(0);
+    lastView='player'; navByLink=false; return;
   }
   document.body.classList.remove('player');
-  const t = h && document.getElementById(h.slice(1));
-  if(t) setTimeout(()=>t.scrollIntoView(),0);
+  const t = h && h.length>1 && document.getElementById(h.slice(1));
+  if(lastView==='player' && !navByLink && homeScroll!==null){ jump(homeScroll); }
+  else if(t){ setTimeout(()=>t.scrollIntoView(),0); }
+  lastView='home'; navByLink=false;
 }
 window.addEventListener('hashchange',route);
 
