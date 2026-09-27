@@ -131,7 +131,8 @@ section.has-hero{padding-top:0}
 .card{display:block;background:#fff;border:1px solid var(--line);transition:box-shadow .2s,transform .2s}
 .card:hover{box-shadow:0 12px 26px rgba(11,31,75,.16);transform:translateY(-3px)}
 .pic{position:relative;aspect-ratio:1/1.05;background:linear-gradient(180deg,#f7f9fc 0%,#dfe8f2 100%);overflow:hidden}
-.pic img{width:100%;height:100%;object-fit:cover}
+.pic img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.pl-top .pic img{position:absolute;inset:0}
 .pic svg.sil{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:74%}
 .pic .cr{position:absolute;top:6px;right:8px;font-size:9px;color:#9aa8b8}
 .pic .recb{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-family:var(--num);font-size:10px;font-weight:700;padding:1px 6px;letter-spacing:.05em}
@@ -395,7 +396,8 @@ footer b{font-family:var(--num);color:#fff;font-size:24px;letter-spacing:.08em;m
 <script>
 /* =========================================================
    ★ ここを書き換えればサイト全体に反映されます ★
-   photo : "photos/yoshida.jpg" のように写真パスを入れると顔写真に
+   photo : 選手一覧カード用の写真  例 "images/members/samoto.jpg"
+   photo2: 個人プロフィールページ用の写真（空欄ならphotoを使用）
    ""    : 空欄の項目は「本人確認中」と表示
    bests : 現役時代の自己ベスト  例 [["100m平泳ぎ","1:05.20","2012 全国JOC"], ...]
    glory : 現役時代の主な戦績    例 [["2012","全国JOC夏季水泳競技大会","100m平泳ぎ 8位"], ...]
@@ -420,7 +422,7 @@ const MEMBERS = [
   {id:"yoshida",  no:6,  name:"吉田 力哉", roma:"RIKIYA YOSHIDA", g:"M", group:"Br", event:"平泳ぎ", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
-  {id:"samoto",   no:7,  name:"佐本 敦基", roma:"", g:"M", group:"Br", event:"平泳ぎ", photo:"",
+  {id:"samoto",   no:7,  name:"佐本 敦基", roma:"", g:"M", group:"Br", event:"平泳ぎ", photo:"images/members/samoto.jpg", photo2:"images/members/samoto-profile.jpg",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
   {id:"doi",      no:8,  name:"土井 脩矢", roma:"", g:"M", group:"Fly", event:"バタフライ", photo:"",
@@ -527,7 +529,7 @@ const v = s => s || TBD;
 const pad = n => String(n).padStart(2,'0');
 const swimTime = t => { const [a,b] = t.includes(':')? t.split(':') : [null,t]; const [s,c]=b.split('.'); return (a?a+"'":"")+s+'"'+c; };
 const SIL = `<svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M8 210c4-56 42-86 92-86s88 30 92 86z" fill="#0b1f4b"/><path d="M86 118h28v18a14 14 0 01-28 0z" fill="#c9d6e3"/><circle cx="100" cy="72" r="44" fill="#c9d6e3"/><path d="M56 66c2-30 22-46 44-46s42 16 44 46c-12-8-26-12-44-12s-32 4-44 12z" fill="#1f4fd6"/><rect x="62" y="66" width="76" height="13" rx="6.5" fill="#14213d"/></svg>`;
-const pic = (m, extra="") => `<div class="pic">${m.photo?`<img src="${m.photo}" alt="${m.name}">`:SIL}<span class="cr">(c) KST</span>${extra}</div>`;
+const pic = (m, extra="", big=false) => { const src = big ? (m.photo2||m.photo) : m.photo; return `<div class="pic">${src?`<img src="${src}" alt="${m.name}">`:SIL}<span class="cr">(c) KST</span>${extra}</div>`; };
 
 const isRelay = r => r[3] && r[3].length===4;
 const LEG_STROKE = {"メドレーリレー":["背泳ぎ","平泳ぎ","バタフライ","自由形"],"フリーリレー":["自由形","自由形","自由形","自由形"]};
@@ -608,7 +610,7 @@ function renderPlayer(id){
   document.getElementById('player').innerHTML = `
     <div class="crumb"><button class="back" onclick="goBack()">‹ 戻る</button><span><a href="#top">TOP</a> ＞ <a href="#members">選手紹介</a> ＞ ${m.name}</span></div>
     <div class="pl-top">
-      ${pic(m)}
+      ${pic(m,"",true)}
       <div>
         <div class="pl-name">${m.name}</div>
         <div class="pl-roma">${m.roma||'&nbsp;'}</div>
@@ -633,8 +635,7 @@ function renderPlayer(id){
     <div class="quote"><p>${m.motto || '<span style="opacity:.5">本人確認中</span>'}</p></div>
 
     ${m.manager?'':`<div class="pl-h">KST出場実績</div>
-    ${careerHTML(id)}
-    <p style="font-size:12px;color:var(--mute);margin-top:10px">※ 2026年はKST公式YouTubeの概要欄より。2024・2025年はKST記録のみ掲載（2026年9月時点）</p>`}
+    ${careerHTML(id)}`}
 
     <div class="pl-h glory-h">過去の栄光<small>GLORY DAYS</small></div>
     <div class="glory">
