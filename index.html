@@ -220,6 +220,12 @@ table.rec{width:100%;border-collapse:collapse;min-width:740px;font-size:14px}
 .rec td.date{font-family:var(--num);font-size:13px;white-space:nowrap;color:var(--mute)}
 .rec tr.empty td.time,.rec tr.empty td.who{color:#b4c0cd;font-family:inherit;font-size:12px;font-weight:700}
 .who a{font-weight:700;border-bottom:1px dotted var(--cyan)}
+.legs{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,max-content));gap:4px 22px}
+.legs li{display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.legs .leg{font-size:10px;font-weight:700;color:#fff;background:var(--navy);padding:0 5px;line-height:1.6}
+.legs .lap{font-family:var(--num);font-size:14px;color:var(--mute)}
+.bestbox li small .legtag{margin-left:6px;color:var(--red);font-weight:700}
+.bestbox li .laptxt{font-family:var(--num);font-size:14px;color:var(--mute);margin-left:10px;font-weight:500}
 .who a:hover{color:var(--cyan)}
 .tie{display:inline-block;font-size:10px;background:var(--red);color:#fff;padding:0 6px;margin-left:4px;vertical-align:2px}
 .rec-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-top:12px}
@@ -430,7 +436,7 @@ const MEETS = {
   55:{name:"第55回和歌山県短水路選手権水泳競技大会", year:2026, dates:"2026.1.10 – 1.11"},
 };
 
-// KST記録（短水路）2026.9.20現在  [種目, 距離, 記録, [記録保持者id], 日付, 大会回, 同タイム]
+// KST記録（短水路）2026.9.20現在  [種目, 距離, 記録, [記録保持者id], 日付, 大会回, 同タイム, [リレーのラップ 1泳〜4泳]]
 const RECORDS = {
   M:[
     ["自由形","50m","23.79",["okamoto"],"2026/1/10",55],
@@ -449,8 +455,8 @@ const RECORDS = {
     ["個人メドレー","100m","58.93",["yamamoto"],"2026/1/10",55],
     ["個人メドレー","200m","2:18.00",["kimura"],"2024/1/14",53],
     ["個人メドレー","400m"],
-    ["フリーリレー","200m","1:34.43",["doi","nakasuji","okamoto","yamamoto"],"2026/1/10",55],
-    ["メドレーリレー","200m","1:43.11",["nakasuji","yoshida","doi","okamoto"],"2026/1/11",55],
+    ["フリーリレー","200m","1:34.43",["doi","nakasuji","okamoto","yamamoto"],"2026/1/10",55,false,["23.82","23.25","23.48","23.88"]],
+    ["メドレーリレー","200m","1:43.11",["nakasuji","yoshida","doi","okamoto"],"2026/1/11",55,false,["26.45","29.15","23.92","23.59"]],
   ],
   W:[
     ["自由形","50m","28.11",["sakai"],"2025/1/11",54],
@@ -472,6 +478,9 @@ const swimTime = t => { const [a,b] = t.includes(':')? t.split(':') : [null,t]; 
 const SIL = `<svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M8 210c4-56 42-86 92-86s88 30 92 86z" fill="#0b1f4b"/><path d="M86 118h28v18a14 14 0 01-28 0z" fill="#c9d6e3"/><circle cx="100" cy="72" r="44" fill="#c9d6e3"/><path d="M56 66c2-30 22-46 44-46s42 16 44 46c-12-8-26-12-44-12s-32 4-44 12z" fill="#1f4fd6"/><rect x="62" y="66" width="76" height="13" rx="6.5" fill="#14213d"/></svg>`;
 const pic = (m, extra="") => `<div class="pic">${m.photo?`<img src="${m.photo}" alt="${m.name}">`:SIL}<span class="cr">(c) KST</span>${extra}</div>`;
 
+const isRelay = r => r[3] && r[3].length===4;
+const LEG_STROKE = {"メドレーリレー":["背泳ぎ","平泳ぎ","バタフライ","自由形"],"フリーリレー":["自由形","自由形","自由形","自由形"]};
+function legOf(r,id){ const i=r[3].indexOf(id); return {n:i+1, lap:(r[7]||[])[i]||"", stroke:(LEG_STROKE[r[0]]||[])[i]||""}; }
 function recsOf(id){
   const out=[];
   for(const g of ["M","W"]) for(const r of RECORDS[g]) if(r[2] && r[3].includes(id)) out.push({g,r});
@@ -501,7 +510,7 @@ function renderGroups(){
 function renderPlayer(id){
   const m = byId[id]; if(!m) return false;
   const recs = recsOf(id);
-  const indiv = recs.filter(x=>x.r[3].length<4);
+  const indiv = recs.filter(x=>!isRelay(x.r)), relays = recs.filter(x=>isRelay(x.r)), held = [...indiv, ...relays];
   const byYear = {};
   recs.forEach(({g,r})=>{
     String(r[5]).split('･').forEach(k=>{
@@ -527,7 +536,8 @@ function renderPlayer(id){
         </table>
         ${m.manager?'':`<div class="bestbox">
           <div class="badge"><b>KST</b><span>記録保持</span></div>
-          ${indiv.length? `<ul>${indiv.map(({g,r})=>`<li><small>${g==='W'?'女子 ':''}${r[1]}${r[0]}</small><strong>${swimTime(r[2])}</strong></li>`).join('')}</ul>`
+          ${held.length? `<ul>${held.map(({g,r})=>{ if(!isRelay(r)) return `<li><small>${g==='W'?'女子 ':''}${r[1]}${r[0]}</small><strong>${swimTime(r[2])}</strong></li>`;
+              const L=legOf(r,id); return `<li><small>${g==='W'?'女子 ':''}${r[1]}${r[0]}<span class="legtag">${L.n}泳 ${L.stroke}</span></small><strong>${swimTime(r[2])}</strong>${L.lap?`<span class="laptxt">ラップ ${swimTime(L.lap)}</span>`:''}</li>`; }).join('')}</ul>`
                         : `<ul><li class="none">個人種目のKST記録、虎視眈々と狙っています。</li></ul>`}
         </div>`}
       </div>
@@ -539,7 +549,7 @@ function renderPlayer(id){
     ${m.manager?'':`<div class="pl-h">KST出場実績</div>
     ${Object.keys(byYear).length? `<ul class="results">${Object.keys(byYear).sort((a,b)=>b-a).map(y=>`
       <li><div class="y">${y}</div><div><div class="m">${byYear[y].meet}</div>
-      ${byYear[y].items.map(r=>`<div class="r">${r[1]}${r[0]}${r[3].length===4?'（リレー）':''}<b>${r[2]}</b><span class="kst">KST記録</span></div>`).join('')}</div></li>`).join('')}</ul>`
+      ${byYear[y].items.map(r=>{ const L=isRelay(r)?legOf(r,id):null; return `<div class="r">${r[1]}${r[0]}${L?`（${L.n}泳）`:''}<b>${r[2]}</b>${L&&L.lap?`<span style="font-size:12px;color:var(--mute);margin-left:8px">ラップ ${L.lap}</span>`:''}<span class="kst">KST記録</span></div>`; }).join('')}</div></li>`).join('')}</ul>`
       : '<p class="ph">これから刻みます。</p>'}
     <p style="font-size:12px;color:var(--mute);margin-top:10px">（2026年9月時点）</p>`}
 
@@ -572,7 +582,10 @@ function renderRecords(g){
   rows.forEach(r=>{
     const [st,d,t,who,date,meet,tie]=r;
     const first=st!==prev; prev=st;
-    const names = who? who.map(id=>`<a href="#/player/${id}">${byId[id]?.name||id}</a>`).join(who.length===4?'・':'　/　') : '-';
+    const link = id=>`<a href="#/player/${id}">${byId[id]?.name||id}</a>`;
+    const names = !who ? '-' : isRelay(r)
+      ? `<ol class="legs">${who.map((id,i)=>`<li><span class="leg">${i+1}泳</span>${link(id)}${r[7]&&r[7][i]?`<span class="lap">${r[7][i]}</span>`:''}</li>`).join('')}</ol>`
+      : who.map(link).join('　/　');
     html+=`<tr class="${t?'':'empty'}">${first?`<td class="stroke" rowspan="${span[st]}">${st}</td>`:''}
       <td class="dist">${d}</td><td class="time">${t||'—'}</td>
       <td class="who">${names}${tie?'<span class="tie">同タイム</span>':''}</td>
