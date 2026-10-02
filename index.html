@@ -156,6 +156,8 @@ body.player #player-view{display:block}
 .pl-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:start;padding-bottom:30px}
 .pl-top .pic{aspect-ratio:4/5}
 .pl-name{font-size:clamp(30px,4.2vw,44px);font-weight:900;line-height:1.2}
+.pl-kana{font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;letter-spacing:.08em;margin-left:14px}
+.g-note{font-weight:700;color:#33415a;padding:10px 0}
 .pl-roma{font-family:var(--num);letter-spacing:.14em;color:var(--mute);margin-top:4px}
 .pl-tag{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:3px 12px;margin-top:10px}
 .pl-h{font-size:24px;font-weight:900;border-left:6px solid var(--navy);padding:6px 0 6px 16px;margin:34px 0 14px;background:linear-gradient(90deg,var(--bg2),transparent)}
@@ -405,43 +407,81 @@ footer b{font-family:var(--num);color:#fff;font-size:24px;letter-spacing:.08em;m
 
 const MEMBERS = [
   // ---- スタッフ（staff:true / pos=カードの帯に出る略称 / role=肩書き）
-  {id:"kotani",   name:"小谷 智也", roma:"", g:"M", group:"STAFF", staff:true, pos:"HC", role:"監督", roleEn:"HEAD COACH", photo:"images/members/kotani.jpg", photo2:"images/members/kotani-profile.jpg",
-   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
-   bests:[], glory:[]},
+  {id:"kotani",   name:"小谷 智也", roma:"TOMOYA KOTANI", g:"M", group:"STAFF", staff:true, pos:"HC", role:"監督", roleEn:"HEAD COACH", photo:"images/members/kotani.jpg", photo2:"images/members/kotani-profile.jpg",
+   answered:true, kana:"こたに ともや",
+   hometown:"和歌山県和歌山市", club:"パルポート", highschool:"和歌山北高校", retired:"2014年（高校3年）", job:"看護師", sake:"ハイボール、ビール", motto:"全力で楽しむ！！",
+   bests:"あまり覚えていない",
+   glory:"あまり覚えていない"},
   {id:"hirono",   name:"廣野 由里", roma:"", g:"W", group:"STAFF", staff:true, pos:"MGR", role:"マネージャー", roleEn:"MANAGER", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
+  {id:"samoto-a", name:"佐本 藍", roma:"AOI SAMOTO", g:"W", group:"STAFF", staff:true, pos:"STAFF", role:"スタッフ", roleEn:"STAFF", photo:"",
+   answered:true, kana:"さもと あおい",
+   hometown:"和歌山県田辺市", club:"ドルフィンSS", highschool:"田辺高校", retired:"2015年（高校3年）", job:"看護師", sake:"ジントニック、梅酒", motto:"逆境こそがチャンス",
+   bests:[],
+   glory:[]},
   // ---- 選手
   {id:"okamoto",  no:1,  name:"岡本 匡史", roma:"", g:"M", group:"Fr", event:"自由形", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
-  {id:"yamamoto", no:2,  name:"山本 悠暉", roma:"", g:"M", group:"Fr", event:"自由形・個人メドレー", photo:"",
-   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
-   bests:[], glory:[]},
-  {id:"nishimoto",no:3,  name:"西本 憲伸", roma:"", g:"M", group:"Fr", event:"自由形", photo:"",
-   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
-   bests:[], glory:[]},
-  {id:"sakai",    no:4,  name:"酒井 文菜", roma:"", g:"W", group:"Fr", event:"自由形", photo:"",
-   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
-   bests:[], glory:[]},
+  {id:"yamamoto", no:2,  name:"山本 悠暉", roma:"YUKI YAMAMOTO", g:"M", group:"Fr", event:"自由形・個人メドレー", photo:"",
+   answered:true, kana:"やまもと ゆうき",
+   hometown:"奈良県五條市", club:"パルポート彩の台", highschool:"智辯学園高校", retired:"現役", job:"FUJITSU", sake:"麦ソー", motto:"酒はプロテイン。",
+   bests:[["200m自由形", "1:49.94", "2017 インカレ"], ["400m自由形", "3:51.62", "2017 インカレ"]],
+   glory:[["2019", "日本選手権", "400m自由形 8位"], ["2018", "日本選手権", "400m自由形 7位"], ["2018", "インカレ", "200m自由形 8位 ／ 400m自由形 4位"], ["2017", "日本選手権", "1500m自由形 8位"], ["2017", "インカレ", "400m自由形 2位"], ["2016", "インカレ", "400m自由形 7位"]]},
+  {id:"nishimoto",no:3,  name:"西本 憲伸", roma:"KENSHIN NISHIMOTO", g:"M", group:"Fr", event:"自由形", photo:"",
+   answered:true, kana:"にしもと けんしん",
+   hometown:"和歌山県和歌山市", club:"むそたSC", highschool:"市立和歌山高等学校", retired:"2022年", job:"会社員（総合商社）", sake:"タコハイ", motto:"後から入ったやつ後輩",
+   bests:[["200m自由形", "1:47.39", "2020 和歌山県短水路"], ["200m個人メドレー", "1:59.32", "2020 和歌山県短水路"], ["50mバタフライ", "23.99", "2021 和歌山県短水路"], ["50m自由形（引き継ぎ）", "22.01", "2021 和歌山県短水路"], ["200m自由形", "1:51.74", "2021 インカレ"]],
+   glory:[["2021", "インカレ", "200m自由形 20位"], ["2016", "全国JOC春季大会", "200m自由形 11位"]]},
+  {id:"sakai",    no:4,  name:"酒井 文菜", roma:"AYANA SAKAI", g:"W", group:"Fr", event:"自由形", photo:"",
+   answered:true, kana:"さかい あやな",
+   hometown:"和歌山県有田郡", club:"アリタSC", highschool:"和歌山北高校", retired:"2018年（大学4年）", job:"体育教師/主婦/2児の母", sake:"梅酒", motto:"",
+   bests:"非公開",
+   glory:"特になし"},
   {id:"nakasuji", no:5,  name:"中筋 勘太", roma:"", g:"M", group:"Ba", event:"背泳ぎ", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
-  {id:"yoshida",  no:6,  name:"吉田 力哉", roma:"RIKIYA YOSHIDA", g:"M", group:"Br", event:"平泳ぎ", photo:"",
+  {id:"yoshida",  no:6,  name:"吉田 力哉", roma:"RIKIYA YOSHIDA", kana:"よしだ りきや", g:"M", group:"Br", event:"平泳ぎ", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
-  {id:"samoto",   no:7,  name:"佐本 敦基", roma:"", g:"M", group:"Br", event:"平泳ぎ", photo:"images/members/samoto.jpg", photo2:"images/members/samoto-profile.jpg",
-   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
-   bests:[], glory:[]},
+  {id:"samoto",   no:7,  name:"佐本 敦基", roma:"ATSUKI SAMOTO", g:"M", group:"Br", event:"平泳ぎ", photo:"images/members/samoto.jpg", photo2:"images/members/samoto-profile.jpg",
+   answered:true, kana:"さもと あつき",
+   hometown:"和歌山県岩出市", club:"NAGA SC", highschool:"粉河高校", retired:"2017年（高校3年）", job:"営業マン", sake:"麦ソーダ", motto:"大統領のように働き王様のように遊ぶ",
+   bests:[["50m平泳ぎ", "30.2", "2017 和歌山県短水路選手権"], ["1500m自由形", "16:07.80", "2016 和歌山県短水路選手権"]],
+   glory:[]},
   {id:"doi",      no:8,  name:"土井 脩矢", roma:"", g:"M", group:"Fly", event:"バタフライ", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
-  {id:"nakaoka",  no:9,  name:"仲岡 唯斗", roma:"", g:"M", group:"Fly", event:"バタフライ", photo:"images/members/nakaoka.jpg", photo2:"images/members/nakaoka-profile.jpg",
-   hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
-   bests:[], glory:[]},
+  {id:"nakaoka",  no:9,  name:"仲岡 唯斗", roma:"YUITO NAKAOKA", g:"M", group:"Fly", event:"バタフライ", photo:"images/members/nakaoka.jpg", photo2:"images/members/nakaoka-profile.jpg",
+   answered:true, kana:"なかおか ゆいと",
+   hometown:"和歌山県紀の川市", club:"ナガSC", highschool:"和歌山北高校", retired:"2017年（大学4年）", job:"会社員", sake:"ジンジャエール（お酒飲めないのでソフトドリンク）", motto:"伝説の2バタ",
+   bests:[["50mバタフライ", "24.48", "2017 新潟:県SC協チャンピンシップ"], ["100mバタフライ", "53.78", "2017 新潟:長岡市室内選手権"], ["200mバタフライ", "1:59.01", "2017 新潟:県SC協チャンピンシップ"]],
+   glory:[["2017", "日本学生選手権", "出場"], ["2016", "日本学生選手権", "出場"], ["2015", "日本学生選手権", "出場"], ["2014", "日本学生選手権", "出場"], ["2014", "全国JOC春季大会", "100mバタフライ 10位"]]},
   {id:"kimura",   no:10, name:"木村 匡克", roma:"", g:"M", group:"IM", event:"個人メドレー", photo:"",
    hometown:"", club:"", highschool:"", retired:"", job:"", sake:"", motto:"",
    bests:[], glory:[]},
+  // ---- アンケートで追加された新メンバー
+  {id:"takeuchi", no:11, name:"竹内 大裕", roma:"DAISUKE TAKEUCHI", g:"M", group:"Fr", event:"自由形", photo:"",
+   answered:true, kana:"たけうち だいすけ",
+   hometown:"和歌山県紀の川市", club:"ナガSC", highschool:"那賀高校", retired:"2013年（高校3年）", job:"公務員", sake:"ビール", motto:"無理なもんは無理",
+   bests:"非公開",
+   glory:"非公開"},
+  {id:"hattori", no:12, name:"服部 芳和", roma:"YOSHIKAZU HATTORI", g:"M", group:"Fr", event:"自由形", photo:"",
+   answered:true, kana:"はっとり よしかず",
+   hometown:"和歌山県紀の川市", club:"アドヴァンスカツラギ", highschool:"橋本高校", retired:"2015年（高校3年）", job:"理学療法士", sake:"梅酒ロック", motto:"限界突破、無理なら即撤退。",
+   bests:[["200m自由形", "約1:55.00", ""]],
+   glory:"高校3年生まで辞めずにやりきりました。"},
+  {id:"yamamoto-k", no:13, name:"山本 香生子", roma:"KANAKO YAMAMOTO", g:"W", group:"Br", event:"平泳ぎ", photo:"",
+   answered:true, kana:"やまもと かなこ",
+   hometown:"東京都葛飾区", club:"JSS立石", highschool:"武蔵野高校", retired:"2024年（27歳）", job:"", sake:"ビール、麦・芋焼酎ソーダ割り", motto:"Road to LA2028",
+   bests:[["100m平泳ぎ", "1:05.88", "2014 JAPAN OPEN"], ["200m平泳ぎ", "2:20.90", "2015 日本選手権"]],
+   glory:[["2020", "オリンピック", "出場（2012・2016・2020）"], ["2015", "世界水泳", "200m平泳ぎ 優勝"]]},
+  {id:"kuriyama", no:14, name:"栗山 梨央奈", roma:"RIONA KURIYAMA", g:"W", group:"Fly", event:"バタフライ", photo:"",
+   answered:true, kana:"くりやま りおな",
+   hometown:"和歌山県橋本市", club:"パルポートあやの台", highschool:"", retired:"2019年", job:"看護師", sake:"ハイボール", motto:"イケメンは心の栄養、明日への活力",
+   bests:[["50mバタフライ", "29.2", ""], ["100mバタフライ", "1:03.8", ""]],
+   glory:[]},
 ];
 
 const GROUPS = [
@@ -530,7 +570,7 @@ const RESULTS = {
 /* ================= 以下は表示ロジック ================= */
 const byId = Object.fromEntries(MEMBERS.map(m=>[m.id,m]));
 const TBD = '<span class="ph">本人確認中</span>';
-const v = s => s || TBD;
+const v = (s,m) => s || (m&&m.answered ? '—' : TBD);
 const pad = n => String(n).padStart(2,'0');
 const swimTime = t => { const [a,b] = t.includes(':')? t.split(':') : [null,t]; const [s,c]=b.split('.'); return (a?a+"'":"")+s+'"'+c; };
 const SIL = `<svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M8 210c4-56 42-86 92-86s88 30 92 86z" fill="#0b1f4b"/><path d="M86 118h28v18a14 14 0 01-28 0z" fill="#c9d6e3"/><circle cx="100" cy="72" r="44" fill="#c9d6e3"/><path d="M56 66c2-30 22-46 44-46s42 16 44 46c-12-8-26-12-44-12s-32 4-44 12z" fill="#1f4fd6"/><rect x="62" y="66" width="76" height="13" rx="6.5" fill="#14213d"/></svg>`;
@@ -559,8 +599,8 @@ function renderGroups(){
           ${pic(m, n?`<span class="recb">KST RECORD ×${n}</span>`:'')}
           <div class="band"><span class="pos">${m.staff?m.pos:k}</span>${m.staff?`<span class="no">${m.role}</span>`:`<span class="no">${pad(m.no)}</span>`}<span>${m.name}</span></div>
           <div class="meta">
-            <div class="job">${m.job ? 'Job：'+m.job : '<span class="ph">Job：本人確認中</span>'}</div>
-            <div class="sub">Favorite Alcoholic Drinks：${m.sake||'確認中'}</div>
+            <div class="job">${m.job ? 'Job：'+m.job : (m.answered?'Job：—':'<span class="ph">Job：本人確認中</span>')}</div>
+            <div class="sub">Favorite Alcoholic Drinks：${m.sake||(m.answered?'—':'確認中')}</div>
             <div class="emb">KST</div>
           </div></a>`;}).join('')}</div></div>`;
   }).join('');
@@ -618,14 +658,14 @@ function renderPlayer(id){
       ${pic(m,"",true)}
       <div>
         <div class="pl-name">${m.name}</div>
-        <div class="pl-roma">${m.roma||'&nbsp;'}</div>
+        <div class="pl-roma">${m.roma||'&nbsp;'}${m.kana?`<span class="pl-kana">${m.kana}</span>`:''}</div>
         <span class="pl-tag">${m.staff?`${m.roleEn}：${m.role}`:`No.${pad(m.no)}　種目：${m.event}`}</span>
         <div class="pl-h" style="margin-top:22px">プロフィール</div>
         <table class="ptable">
-          <tr><th>出身地</th><td>${v(m.hometown)}</td></tr>
-          <tr><th>現役時代所属<br>スイミングチーム</th><td>${v(m.club)}</td></tr>
-          <tr><th>高校</th><td>${v(m.highschool)}</td></tr>
-          <tr><th>引退年</th><td>${v(m.retired)}</td></tr>
+          <tr><th>出身地</th><td>${v(m.hometown,m)}</td></tr>
+          <tr><th>現役時代所属<br>スイミングチーム</th><td>${v(m.club,m)}</td></tr>
+          <tr><th>高校</th><td>${v(m.highschool,m)}</td></tr>
+          <tr><th>引退年</th><td>${v(m.retired,m)}</td></tr>
         </table>
         ${m.staff?'':`<div class="bestbox">
           <div class="badge"><b>KST</b><span>記録保持</span></div>
@@ -636,8 +676,8 @@ function renderPlayer(id){
       </div>
     </div>
 
-    <div class="pl-h">座右の銘</div>
-    <div class="quote"><p>${m.motto || '<span style="opacity:.5">本人確認中</span>'}</p></div>
+    ${m.answered && !m.motto ? '' : `<div class="pl-h">座右の銘</div>
+    <div class="quote"><p>${m.motto || '<span style="opacity:.5">本人確認中</span>'}</p></div>`}
 
     ${m.staff?'':`<div class="pl-h">KST出場実績</div>
     ${careerHTML(id)}`}
@@ -646,13 +686,13 @@ function renderPlayer(id){
     <div class="glory">
       <div class="g-best">
         <div class="g-lab">現役時代の自己ベスト</div>
-        ${bests.length? `<ul>${bests.map(b=>`<li><small>${b[0]}</small><strong>${b[1].includes('.')?swimTime(b[1]):b[1]}</strong>${b[2]?`<em>${b[2]}</em>`:''}</li>`).join('')}</ul>`
-                      : '<p class="ph">本人確認中</p>'}
+        ${typeof bests==='string' ? `<p class="g-note">${bests}</p>` : bests.length? `<ul>${bests.map(b=>`<li><small>${b[0]}</small><strong>${b[1].includes('.')?swimTime(b[1]):b[1]}</strong>${b[2]?`<em>${b[2]}</em>`:''}</li>`).join('')}</ul>`
+                      : (m.answered?'<p class="g-note">—</p>':'<p class="ph">本人確認中</p>')}
       </div>
       <div class="g-res">
         <div class="g-lab">主な戦績</div>
-        ${glory.length? `<ul class="results">${glory.map(g=>`<li><div class="y">${g[0]}</div><div><div class="m">${g[1]}</div><div class="r">${g[2]||''}</div></div></li>`).join('')}</ul>`
-                      : '<p class="ph">本人確認中</p>'}
+        ${typeof glory==='string' ? `<p class="g-note">${glory}</p>` : glory.length? `<ul class="results">${glory.map(g=>`<li><div class="y">${g[0]}</div><div><div class="m">${g[1]}</div><div class="r">${g[2]||''}</div></div></li>`).join('')}</ul>`
+                      : (m.answered?'<p class="g-note">—</p>':'<p class="ph">本人確認中</p>')}
       </div>
     </div>
 
